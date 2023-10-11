@@ -1,0 +1,232 @@
+/* add root parameteres  */
+
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+
+  --primary-color: #007bff;
+  --primary-color-hover: #0056b3;
+  --primary-color-active: #0056b3;
+
+  --secondary-color: #6c757d;
+  --secondary-color-hover: #545b62;
+  --secondary-color-active: #4e555b;
+
+  --background-color: #f8f9fa;
+  --background-color-hover: #e9ecef;
+  --background-color-active: #dee2e6;
+
+  --border-color: #dee2e6;
+  --border-color-hover: #c1c9d0;
+  --border-color-active: #c1c9d0;
+
+  --text-color: #212529;
+  --text-color-hover: #212529;
+  --text-color-active: #212529;
+
+  --link-color: #007bff;
+  --link-color-hover: #0056b3;
+  --link-color-active: #0056b3;
+
+  --button-color: #007bff;
+  --button-color-hover: #0056b3;
+  --button-color-active: #0056b3;
+
+  --input-color: #495057;
+  --input-color-hover: #495057;
+  --input-color-active: #495057;
+
+  --input-border-color: #ced4da;
+  --input-border-color-hover: #ced4da;
+  --input-border-color-active: #ced4da;
+
+  --padding-small: 0.25rem 0.5rem;
+  --padding-medium: 0.5rem 1rem;
+  --padding-large: 0.75rem 1.5rem;
+
+  --margins-small: 0.25rem;
+  --margins-medium: 0.5rem;
+  --margins-large: 1rem;
+
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-color);
+  padding: 10px;
+}
+
+.header {
+  background-color: lightblue;
+  padding: 10px;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--background-color);
+  padding: 10px;
+}
+
+.column {
+  flex: 1;
+  background-color: white;
+  padding: 10px;
+}
+
+.footer {
+  background-color: lightgreen;
+  padding: 10px;
+}
+
+/* CSS RESET */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* CSS RESET END */
