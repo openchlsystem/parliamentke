@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="openModal">Open Modal</button>
+         <button @click="openModal">{{ buttonLabel }}</button>
         <transition name="modal-fade">
             <div v-if="isModalOpen" class="modal-container">
                 <div class="modal-content">
@@ -13,10 +13,17 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 
 export default {
-    setup() {
+
+    props: {
+        buttonLabel: {
+            type: String,
+            default: 'Open Modal',
+        },
+    },
+    setup(props) {
         const isModalOpen = ref(false);
 
         const openModal = () => {
@@ -28,6 +35,7 @@ export default {
         };
 
         return {
+            ...defineProps(props),
             isModalOpen,
             openModal,
             closeModal,

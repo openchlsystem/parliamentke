@@ -8,10 +8,9 @@
             <a href="#" @click="showDiv = 'committees'">Committees</a>
         </div>
         <div class="activities-contentpanel">
-            <div v-if="showDiv === 'upload'">
-                <h3>Upload Documents</h3>
-                <ModalPopup>
-                    <h1>Modal Content</h1>
+            <div v-if="showDiv === 'upload'">   
+                <ModalPopup  buttonLabel="Upload Document">
+                    <h2>Upload Document</h2>
                     <p>This is the content of the modal.</p>
                     <div>
                         <form @submit.prevent="handleFileUpload">
