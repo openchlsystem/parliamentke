@@ -12,7 +12,7 @@
     <footer class="footer">
       <FooterBar />
     </footer>  
-    <footer class="footer">Footer 2</footer>
+
   </div>
 </template>
 

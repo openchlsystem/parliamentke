@@ -1,4 +1,42 @@
+import datetime
 from django.db import models
+from django.utils import timezone
+
+
+
+class ParliamentFunctions(models.Model):
+    """
+    Represents a function in the system.
+    """
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    
+    def __str__(self):
+        return str(self.name)
+    
+class LegistationStages(models.Model):
+    """
+    Represents a legistation stage in the system.
+    """
+    stage = models.CharField(max_length=255)
+    description = models.TextField()
+    
+    def __str__(self):
+        return str(self.stage)
+    
+
+
+class LegislationDocuments(models.Model):
+    document_name = models.CharField(max_length=255)
+    description = models.TextField()
+    
+
+    def __str__(self):
+        return str(self.document_name)
+    
+
+
+
 
 class File(models.Model):
     """
@@ -11,11 +49,123 @@ class File(models.Model):
         size (int): The size of the file in bytes.
         text (str): A text description of the file.
     """
+    title = models.CharField(max_length=255, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    stage = models.CharField(max_length=255, null=True, blank=True)
+    function = models.CharField(max_length=255, null=True, blank=True)
+    document = models.CharField(max_length=255, null=True, blank=True)
+    status = models.CharField(max_length=255, null=True, blank=True)
     name = models.CharField(max_length=255)
     file = models.FileField(upload_to='uploads/')  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
     type = models.CharField(max_length=255)
     size = models.IntegerField()
     text = models.TextField()
+    fibinary = models.BinaryField(null=True, blank=True)
+    date = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField( editable=False,default=timezone.now)
+    updated_at = models.DateTimeField( editable=False,default=timezone.now)
 
     def __str__(self):
         return str(self.name)
+
+
+
+
+class FileActivities(models.Model):
+    """
+    Represents a bill activity in the system.
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    document = models.CharField(max_length=255, null=True, blank=True)
+    file = models.FileField(upload_to='uploads/')  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    size = models.IntegerField()
+    text = models.TextField()
+    filereference = models.ForeignKey(File, on_delete=models.CASCADE, null=True, blank=True)
+    stage = models.CharField(max_length=255)
+    
+
+class Amendments(models.Model):
+    """
+    Represents an amendment in the system.
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    file = models.FileField(upload_to='uploads/')  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    size = models.IntegerField()
+    text = models.TextField()
+    file = models.ForeignKey(File, on_delete=models.CASCADE)
+    
+
+
+class RulingStages(models.Model):
+    """
+    Represents a ruling stage in the system.
+    """
+    stage = models.CharField(max_length=255)
+    description = models.TextField()
+
+
+class HouseDebate(models.Model):
+    """
+    Represents a house debate in the system.
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    
+
+class HouseDebateActivities(models.Model):
+    """
+    Represents a house debate activity in the system.
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    debate = models.ForeignKey(HouseDebate, on_delete=models.CASCADE)
+    ruilingstage = models.ForeignKey(RulingStages, on_delete=models.CASCADE)
+    File = models.ForeignKey(File, on_delete=models.CASCADE)
+
+
+
+from django.db import models
+
+class Category(models.Model):
+    id = models.CharField(max_length=50, unique=True, primary_key=True)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class BillTracker(models.Model):
+    date = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    proposer = models.CharField(max_length=100)
+    seconder = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+    
+
+    def __str__(self):
+        return self.name
+    
+
+class PetitionTracker(models.Model):
+    date = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    proposer = models.CharField(max_length=100)
+    seconder = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+    
+
+class MotionTracker(models.Model):
+    date = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    proposer = models.CharField(max_length=100)
+    seconder = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+    
+

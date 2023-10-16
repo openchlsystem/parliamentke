@@ -19,6 +19,17 @@ const routes = [
     path:'/backend',
     name: 'backend',
     component: () => import('../views/BackendView.vue')
+  },
+  {
+    path: '/documents/:id/',
+    name: 'documents',
+    component: () => import('../views/DocumentDetails.vue'),
+    props: true,
+  },
+  {
+    path: '/trackers',
+    name: 'trackers',
+    component: () => import('../views/TrackersPage.vue')
   }
 ]
 

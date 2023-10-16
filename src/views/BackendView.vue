@@ -1,55 +1,37 @@
 <template>
     <div class="activities">
         <div class="activities-sidepanel">
-            <h3>side panel</h3>
-            <a href="#" @click="showDiv = 'upload'">Upload Documents</a>
-            <a href="#" @click="showDiv = 'standing'">Standing Orders</a>
-            <a href="#" @click="showDiv = 'rulings'">Rulings</a>
-            <a href="#" @click="showDiv = 'committees'">Committees</a>
+
+
+
+            <ul>
+
+                <li v-for="parliamentfunction in kenyanParliamentFunctions" :key="parliamentfunction.id"
+                    @click="showDiv = parliamentfunction.function">
+                    {{ parliamentfunction.function }}
+                </li>
+            </ul>
+
+
         </div>
-        <div class="activities-contentpanel">
-            <div v-if="showDiv === 'upload'">   
-                <ModalPopup  buttonLabel="Upload Document">
-                    <h2>Upload Document</h2>
-                    <p>This is the content of the modal.</p>
-                    <div>
-                        <form @submit.prevent="handleFileUpload">
-                            <input type="file" name="file" id="file" ref="fileInput" />
-                            <button type="submit">button{{ buttonLabel }}</button>
-                        </form>
-                    </div>
-                </ModalPopup>
-                <!-- {{ fileListing }} -->
-                <ul>
-                    <li v-for="file in fileListing" :key="file">
-                        file {{ file.data }}
-                    </li>
-                </ul>
-                <vue-pdf-app style="height: 100vh;" :pdf="parliament"></vue-pdf-app>
-                <button @click="generatePDF">Generate PDF</button>
-                <!-- Add any additional content for the 'Upload Documents' section -->
-            </div>
-            <div v-else-if="showDiv === 'standing'">
-                <h3>Standing Orders</h3>
-                <!-- Add any additional content for the 'Standing Orders' section -->
-            </div>
-            <div v-else-if="showDiv === 'rulings'">
-                <h3>Rulings</h3>
-                <!-- Add any additional content for the 'Rulings' section -->
-            </div>
-            <div v-else-if="showDiv === 'committees'">
-                <h3>Committees</h3>
-                <!-- Add any additional content for the 'Committees' section -->
-            </div>
-        </div>
+        
+        <DocumentList :showDiv="showDiv"/>
+       
     </div>
 </template>
 
 <script>
 import { PDFDocument, rgb } from 'pdf-lib';
-import ModalPopup from '../components/ModalComponent.vue';
-import { ref } from 'vue';
-import VuePdfApp from "vue3-pdf-app";
+// import ModalPopup from '../components/ModalComponent.vue';
+import { ref, onMounted } from 'vue';
+// import VuePdfApp from "vue3-pdf-app";
+import { kenyanParliamentFunctions } from '../utils/ParliamentFunctions.js';
+import axios from '@/utils/axios';
+// import BillsForm from './BillsForm.vue';
+// import FileActivities from './FileActivivities.vue';
+// import PDFviewer from '../components/PDFviewer.vue';
+import DocumentList from '../views/DocumentList.vue';
+
 
 // import this to use default icons for buttons
 import "vue3-pdf-app/dist/icons/main.css";
@@ -58,14 +40,25 @@ import parliament from "../assets/parliament.pdf";
 
 export default {
     components: {
-        ModalPopup,
-        VuePdfApp,
+        // ModalPopup,
+        // VuePdfApp,
+        // BillsForm,
+        // FileActivities,
+        // PDFviewer,
+        DocumentList,
+    },
+    data() {
+        return {
+            customButtonClass: 'your-custom-button-class',
+            customIconClass: 'bi bi-pencil', // Define the icon class dynamically
+        };
     },
     setup() {
-        const showDiv = ref('upload');
+        const showDiv = ref('Legislation');
         const buttonLabel = ref('Upload Documents');
         const fileInput = ref(null);
         const fileListing = ref([]);
+        const documents = ref([])
 
 
         // const path = require('../assets/');
@@ -100,7 +93,7 @@ export default {
                 color: rgb(0, 0, 0),
             });
 
-            
+
 
             const pdfBytes = await pdfDoc.save();
 
@@ -111,6 +104,16 @@ export default {
             window.open(url);
         };
 
+        const getDocuments = async () => {
+            const response = await axios.get('/files/');
+            documents.value = response.data
+            console.log("documents", response)
+        }
+
+        onMounted(() => {
+            getDocuments();
+        })
+
         return {
             showDiv,
             buttonLabel,
@@ -119,7 +122,11 @@ export default {
             fileListing,
             generatePDF,
             parliament,
-           
+            kenyanParliamentFunctions,
+            documents,
+            getDocuments,
+
+
         };
     },
 };

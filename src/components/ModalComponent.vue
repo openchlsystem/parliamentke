@@ -1,11 +1,15 @@
 <template>
     <div>
-         <button @click="openModal">{{ buttonLabel }}</button>
+        <!-- Bind the class from the prop to the button element -->
+        <!-- <button @click="openModal" :class="buttonClass">{{ buttonLabel }}</button> -->
+        <button @click="openModal" :class="['btn', 'btn-primary', buttonClass]">
+          <i :class="iconClass"></i> {{ buttonLabel }}
+        </button>
         <transition name="modal-fade">
             <div v-if="isModalOpen" class="modal-container">
                 <div class="modal-content">
-                    <slot></slot>
                     <button @click="closeModal">Close</button>
+                    <slot></slot>
                 </div>
             </div>
         </transition>
@@ -16,12 +20,10 @@
 import { ref, defineProps } from 'vue';
 
 export default {
-
     props: {
-        buttonLabel: {
-            type: String,
-            default: 'Open Modal',
-        },
+        buttonLabel: String,
+        buttonClass: String, // Define a prop to receive the class from the parent
+        iconClass: String,
     },
     setup(props) {
         const isModalOpen = ref(false);
@@ -43,6 +45,3 @@ export default {
     },
 };
 </script>
-
-<style>
-</style>
