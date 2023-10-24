@@ -1,6 +1,8 @@
 # myapp/urls.py
 from django.urls import path
-from .views import FileListCreateView, FileDetailView,AmendmentsListCreateView,FileActivitiesListCreateView,HouseDebateActivitiesListCreateView,HouseDebateListCreateView,LegistationDocumentsListCreateView,LegistationStagesListCreateView,ParliamentFunctionsListCreateView,RulesStagesListCreateView,CategoriesListCreateView,BillTrackerListCreateView, PetitionTrackerListCreateView, MotionTrackerListCreateView
+# from .views import FileListCreateView, FileDetailView,AmendmentsListCreateView,FileActivitiesListCreateView,HouseDebateActivitiesListCreateView,HouseDebateListCreateView,LegistationDocumentsListCreateView,LegistationStagesListCreateView,ParliamentFunctionsListCreateView,RulesStagesListCreateView,CategoriesListCreateView,BillTrackerListCreateView, PetitionTrackerListCreateView, MotionTrackerListCreateView
+
+from .views import *
 
 urlpatterns = [
     path('files/', FileListCreateView.as_view(), name='file-list-create'),
@@ -17,6 +19,8 @@ urlpatterns = [
     path('billtrackers/', BillTrackerListCreateView.as_view(), name='billtracker-list-create'),
     path('petitiontrackers/', PetitionTrackerListCreateView.as_view(), name='petitiontracker-list-create'),
     path('motiontrackers/', MotionTrackerListCreateView.as_view(), name='motiontracker-list-create'),
+    path('DocumentIndex/', DocumentIndexListCreateView.as_view(), name='DocumentIndex-list-create'),
+    path('DocumentIndex/<int:pk>/', DocumentIndexDetailView.as_view(), name='DocumentIndex-detail'),
 ]
 
 

@@ -10,7 +10,7 @@
           <router-link to="/about">Committees</router-link>
         </div>
       </div> -->
-      <router-link to="/about">Office of the Chair</router-link> |
+      <router-link to="/dashboard">Dashboard</router-link> |
         <router-link to="/about">Debate</router-link> |
         <router-link to="/trackers">Trackers</router-link> |
       <div class="dropdown">

@@ -1,7 +1,7 @@
 # myapp/views.py
 from rest_framework import generics
-from .models import Category, File,RulingStages,Amendments,FileActivities,HouseDebate,HouseDebateActivities,LegislationDocuments,LegistationStages,ParliamentFunctions
-from .serializers import CategorySerializer, FileSerializer,AmendmentsSerializer,FileActivitiesSerializer,HouseDebateSerializer,RulesStagesSerializer,HouseDebateActivitiesSerializer,LegistationStagesSerializer,LegistationDocumentsSerializer,ParliamentFunctionsSerializer
+from .models import Category, File,RulingStages,Amendments,FileActivities,HouseDebate,HouseDebateActivities,LegislationDocuments,LegistationStages,ParliamentFunctions,DocumentIndex
+from .serializers import CategorySerializer, FileSerializer,AmendmentsSerializer,FileActivitiesSerializer,HouseDebateSerializer,RulesStagesSerializer,HouseDebateActivitiesSerializer,LegistationStagesSerializer,LegistationDocumentsSerializer,ParliamentFunctionsSerializer,DocumentIndexSerializer
 # import django filters 
 from django_filters import rest_framework as filters
 
@@ -80,3 +80,14 @@ class PetitionTrackerListCreateView(generics.ListCreateAPIView):
 class MotionTrackerListCreateView(generics.ListCreateAPIView):
     queryset = MotionTracker.objects.all()
     serializer_class = MotionTrackerSerializer
+
+
+class DocumentIndexListCreateView(generics.ListCreateAPIView):
+    queryset = DocumentIndex.objects.all()
+    serializer_class = DocumentIndexSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('text_id','parent','heirarchy',)
+    
+class DocumentIndexDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = DocumentIndex.objects.all()
+    serializer_class = DocumentIndexSerializer

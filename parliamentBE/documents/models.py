@@ -168,4 +168,31 @@ class MotionTracker(models.Model):
     seconder = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     
+    
+from django.db import models
+from django.utils import timezone
 
+class DocumentIndex(models.Model):
+    text_id = models.AutoField(primary_key=True, editable=False, unique=True)
+    date = models.DateTimeField(default=timezone.now)
+    
+    # Define choices for the 'document' field
+    DOCUMENT_CHOICES = (
+        ('Standing Orders', 'Standing Orders'),
+        ('Constitution', 'Constitution'),
+    )
+    
+    document = models.CharField(max_length=100, choices=DOCUMENT_CHOICES)
+    
+    # Define choices for the 'heirarchy' field
+    HIERARCHY_CHOICES = (
+        ('Document', 'Document'),
+        ('Part', 'Part'),
+        ('Header', 'Header'),
+        ('Paragraph', 'Paragraph'),
+    )
+    
+    heirarchy = models.CharField(max_length=100, choices=HIERARCHY_CHOICES)
+    
+    content = models.CharField(max_length=10000)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)

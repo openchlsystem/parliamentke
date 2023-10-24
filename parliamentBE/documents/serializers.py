@@ -1,6 +1,6 @@
 # myapp/serializers.py
 from rest_framework import serializers
-from documents.models import Category, File,RulingStages,Amendments,FileActivities,HouseDebate,HouseDebateActivities,LegislationDocuments,LegistationStages,ParliamentFunctions
+from documents.models import Category, File,RulingStages,Amendments,FileActivities,HouseDebate,HouseDebateActivities,LegislationDocuments,LegistationStages,ParliamentFunctions,DocumentIndex
 
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -74,4 +74,10 @@ class PetitionTrackerSerializer(serializers.ModelSerializer):
 class MotionTrackerSerializer(serializers.ModelSerializer):
     class Meta:
         model = MotionTracker
+        fields = '__all__'
+        
+
+class DocumentIndexSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DocumentIndex
         fields = '__all__'
