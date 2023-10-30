@@ -16,13 +16,12 @@
       <label for="date">Date:</label>
       <input type="date" id="date" v-model="newBill.date" required />
 
-      <label for="title">Document Title:</label>
-      <input type="text" id="name" v-model="newBill.name" required />
+    
 
-      <label for="description"> Description:</label>
+      <label for="description"> Subject:</label>
       <textarea
         id="description"
-        v-model="newBill.description"
+        v-model="newBill.subject"
         required
       ></textarea>
 
@@ -45,13 +44,7 @@
 
             <p>size {{ newBill.size }}</p> -->
 
-      <label for="Maturity Date">Maturity Date</label>
-      <input
-        type="date"
-        id="Maturity Date"
-        v-model="newBill.maturity_date"
-        required
-      />
+   
 
       <button type="submit">Submit</button>
     </form>
@@ -72,14 +65,12 @@ export default {
 
     const newBill = ref({
       name: "",
-      description: "",
-      stage: selectedStage.value,
-      type: selectedDocument.value,
+      subject: "",
       status: "",
       date: "",
       proposer: "",
       seconder: "",
-      maturity_date: "",
+
     });
 
     const fileInput = ref(null);
@@ -100,13 +91,10 @@ export default {
 
     const submitBill = () => {
       const formData = new FormData();
-      formData.append("name", newBill.value.name); // Append the title
-      formData.append("description", newBill.value.description); // Append the description
+      formData.append("subject", newBill.value.subject); // Append the description
       formData.append("date", newBill.value.date); // Append the date
       formData.append("proposer", newBill.value.proposer);
       formData.append("seconder", newBill.value.seconder);
-      formData.append("maturity_date", newBill.value.maturity_date);
-      formData.append("stage", newBill.value.stage);
       formData.append("status", "draft");
 
       console.log(formData);

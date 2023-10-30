@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import "@/assets/css/style.css";
 import VueGoogleCharts from "vue-google-charts";
-import store from './store/store' // Import the Vuex store
+import store from '@/store/store' // Import the Vuex store
 
 
 

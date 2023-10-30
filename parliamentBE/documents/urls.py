@@ -17,8 +17,12 @@ urlpatterns = [
     path('rules-stages/', RulesStagesListCreateView.as_view(), name='rules-stages-list-create'),
     path('categories/', CategoriesListCreateView.as_view(),name='categories'),
     path('billtrackers/', BillTrackerListCreateView.as_view(), name='billtracker-list-create'),
+    
     path('petitiontrackers/', PetitionTrackerListCreateView.as_view(), name='petitiontracker-list-create'),
+    path('petitionactivitytracker/', PetitionTrackerActivitysListCreateView.as_view(), name='petitionactivitytracker-list-create'),
+    path('petitionactivitytracker/<int:pk>/', PetitionTrackerActivityDetailsView.as_view(), name='update-petitionactivitytracker-list-create'),
     path('motiontrackers/', MotionTrackerListCreateView.as_view(), name='motiontracker-list-create'),
+    path('motiontrackers/<int:pk>/', MotionTrackerDetailView.as_view(), name='update-motiontracker-list-create'),
     path('DocumentIndex/', DocumentIndexListCreateView.as_view(), name='DocumentIndex-list-create'),
     path('DocumentIndex/<int:pk>/', DocumentIndexDetailView.as_view(), name='DocumentIndex-detail'),
 ]

@@ -140,11 +140,16 @@ class Category(models.Model):
 
 class BillTracker(models.Model):
     date = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=100)
+    serialno = models.CharField(max_length=100)
+    bill = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
-    proposer = models.CharField(max_length=100)
-    seconder = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
+    sponsor = models.CharField(max_length=100)
+    billnumber = models.CharField(max_length=100)
+    maturity_date = models.DateTimeField(default=timezone.now)
+    seconder = models.CharField(max_length=100, null=True, blank=True)
+    status = models.CharField(max_length=100, null=True, blank=True)
+    gazette_no = models.CharField(max_length=100)
+    
     
 
     def __str__(self):
@@ -153,24 +158,30 @@ class BillTracker(models.Model):
 
 class PetitionTracker(models.Model):
     date = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
-    proposer = models.CharField(max_length=100)
-    seconder = models.CharField(max_length=100)
+    presenter = models.CharField(max_length=100)
+    petitioner = models.CharField(max_length=100)
+    subject = models.CharField(max_length=5000)
+    date_due = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=100, default="new")
+    
+class PetitiontrackerActivity(models.Model):
+    PetitionTracker = models.ForeignKey(PetitionTracker, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    description = models.CharField(max_length=5000)
     status = models.CharField(max_length=100)
+    
     
 
 class MotionTracker(models.Model):
     date = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
+    subject = models.TextField(max_length=5000)
     proposer = models.CharField(max_length=100)
     seconder = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
+    status = models.CharField(max_length=100,default="new")
     
     
-from django.db import models
-from django.utils import timezone
+
+
 
 class DocumentIndex(models.Model):
     text_id = models.AutoField(primary_key=True, editable=False, unique=True)

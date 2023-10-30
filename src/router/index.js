@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
@@ -47,11 +47,16 @@ const routes = [
     name: "settings",
     component: () => import("../views/SettingsPage.vue"),
   },
+  {
+    path: "/documentsearch",
+    name: "documentsearch",
+    component: () => import("../views/DocumentListPage.vue"),
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

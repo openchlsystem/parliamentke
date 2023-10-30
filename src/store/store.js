@@ -4,6 +4,9 @@ const store = createStore({
   state() {
     return {
       documentindex: null,
+      documentindexpart: null,
+      documentindexheader: null,
+      documentindexparagraph: null,
       // Your state properties go here
     };
   },
@@ -11,7 +14,18 @@ const store = createStore({
     // Your mutations go here
     setDocumentIndex(state, documentindex) {
       state.documentindex = documentindex;
-    }
+    },
+
+    setDocumentIndexPart(state, documentindexpart) {
+      state.documentindexpart = documentindexpart;
+    },
+
+    setDocumentIndexHeader(state, documentindexheader) {
+      state.documentindexheader = documentindexheader;
+    },
+    setDocumentIndexParagraph(state, documentindexparagraph) {
+      state.documentindexparagraph = documentindexparagraph;
+    },
   },
   actions: {
     // Your actions go here

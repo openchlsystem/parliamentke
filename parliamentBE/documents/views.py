@@ -1,8 +1,9 @@
 # myapp/views.py
 from rest_framework import generics
-from .models import Category, File,RulingStages,Amendments,FileActivities,HouseDebate,HouseDebateActivities,LegislationDocuments,LegistationStages,ParliamentFunctions,DocumentIndex
-from .serializers import CategorySerializer, FileSerializer,AmendmentsSerializer,FileActivitiesSerializer,HouseDebateSerializer,RulesStagesSerializer,HouseDebateActivitiesSerializer,LegistationStagesSerializer,LegistationDocumentsSerializer,ParliamentFunctionsSerializer,DocumentIndexSerializer
-# import django filters 
+from .models import *
+
+
+from .serializers import *
 from django_filters import rest_framework as filters
 
 
@@ -25,7 +26,7 @@ class FileActivitiesListCreateView(generics.ListCreateAPIView):
     queryset = FileActivities.objects.all()
     serializer_class = FileActivitiesSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('id','filereference',)
+    filterset_fields = ('id','filereference','stage')
     
 class HouseDebateActivitiesListCreateView(generics.ListCreateAPIView):
     queryset = HouseDebateActivities.objects.all()
@@ -65,19 +66,37 @@ class CategoriesListCreateView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
     
 
-from rest_framework import generics
+
 from .models import BillTracker, PetitionTracker, MotionTracker
 from .serializers import BillTrackerSerializer, PetitionTrackerSerializer, MotionTrackerSerializer
 
 class BillTrackerListCreateView(generics.ListCreateAPIView):
     queryset = BillTracker.objects.all()
     serializer_class = BillTrackerSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('id','status','sponsor','seconder')
 
 class PetitionTrackerListCreateView(generics.ListCreateAPIView):
     queryset = PetitionTracker.objects.all()
     serializer_class = PetitionTrackerSerializer
+    
+
+class PetitionTrackerActivitysListCreateView(generics.ListCreateAPIView):
+    queryset = PetitiontrackerActivity.objects.all()
+    serializer_class = PetitionActivitySerializer
+    
+    
+class PetitionTrackerActivityDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PetitiontrackerActivity.objects.all()
+    serializer_class = PetitionActivitySerializer
 
 class MotionTrackerListCreateView(generics.ListCreateAPIView):
+    queryset = MotionTracker.objects.all()
+    serializer_class = MotionTrackerSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('id','status','proposer','seconder')
+    
+class MotionTrackerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = MotionTracker.objects.all()
     serializer_class = MotionTrackerSerializer
 

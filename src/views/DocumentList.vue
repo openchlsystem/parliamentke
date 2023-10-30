@@ -123,7 +123,7 @@ import { ref, onMounted, watch } from "vue";
 import { kenyanParliamentFunctions } from "../utils/ParliamentFunctions.js";
 import axios from "@/utils/axios";
 import BillsForm from "./BillsForm.vue";
-import FileActivities from "./FileActivivities.vue";
+import FileActivities from "./FileActivities.vue";
 import PDFviewer from "../components/PDFviewer.vue";
 // import PDFextractor from '../components/PDFtextextractor.vue';
 
