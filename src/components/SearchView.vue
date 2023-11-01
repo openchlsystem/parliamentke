@@ -13,6 +13,9 @@
     </button>
     <div class="search-buttons">
       <button>Documents</button>
+      <button>Bill</button>
+      <button>Petion</button>
+      <button>Motion</button>
       <button>Events</button>
       <button @click="this.$router.push('documentsearch')">
         Advanced Search

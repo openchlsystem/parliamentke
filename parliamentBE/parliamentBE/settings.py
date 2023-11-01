@@ -182,4 +182,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-    
+# Import datetime formats if not already imported
+from django.conf.global_settings import DATETIME_INPUT_FORMATS
+
+# Add the new format to DATETIME_INPUT_FORMATS
+DATETIME_INPUT_FORMATS += ['%d/%m/%Y']

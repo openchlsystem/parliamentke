@@ -295,6 +295,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 select {
   height: 2.25rem;
+  width: auto;
+  padding: 10px;
+  margin: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+  border-radius: 4px;
 }
 
 textarea {
@@ -303,7 +311,7 @@ textarea {
   border: 1px solid var(--border-color);
   font-size: 1rem;
   transition: border-color 0.3s ease;
-  height: 40px;
+  height: 30px;
   padding: 10px;
 }
 
@@ -1084,8 +1092,6 @@ li:hover {
   opacity: 0;
 }
 
-
-
 /* Calender CSS  */
 
 .calendar {
@@ -1486,35 +1492,187 @@ li:hover {
 /* Motions Card  */
 
 /* CSS for the list */
+/* CSS for the Library-style Bill Tracker Section */
+/* CSS for the Motions Tracker Styled Similar to Library Theme */
 .motion-list {
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
-.motion-list li {
-  flex: 1 4 calc(33.33% - 20px); 
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  text-align: left;
+.motion-ul {
+    list-style: none;
+    padding: 0;
 }
 
-.motion-list li p {
-  margin: 8px 0;
+.motion-item {
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
-.motion-list li p span {
-  font-weight: bold;
+.motion-details {
+    margin-bottom: 15px;
 }
+
+.motion-details span {
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.adopted-button, .adopt-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.adopted-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.adopted-button {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.adopt-button {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+/* Adjust the button popup and modal styles if necessary */
+/* CustomButtonClass */
+/* CustomIconClass */
+
+.bill-item {
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.bill-details {
+    margin-bottom: 15px;
+}
+
+.bill-title {
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.bill-description {
+    margin-bottom: 10px;
+}
+
+.bill-id,
+.bill-date,
+.bill-status,
+.bill-maturity-date {
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.view-details-link {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top: 10px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.view-details-link:hover {
+    background-color: #2980b9;
+}
+
+.bill-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Adjust the button popup and modal styles if necessary */
+/* CustomButtonClass */
+/* CustomIconClass */
+
+/* CSS for the Petition Tracker Styled Similar to Library Theme limited to petition-ul */
+
+.petition-ul {
+    list-style: none;
+    padding: 0;
+}
+
+.petition-ul .petition-item {
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.petition-ul .petition-item .petition-details {
+    margin-bottom: 15px;
+}
+
+.petition-ul .petition-item .petition-details span {
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.petition-ul .petition-item .petition-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.petition-ul .petition-item .form-popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.petition-ul .petition-item form {
+    display: flex;
+    flex-direction: column;
+}
+
+.petition-ul .petition-item label {
+    margin-bottom: 5px;
+}
+
+.petition-ul .petition-item textarea {
+    margin-bottom: 10px;
+}
+
+.petition-ul .petition-item button {
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.petition-ul .petition-item button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
@@ -1523,6 +1681,85 @@ li:hover {
   }
 }
 
+/* Bills list  */
+
+/* src/assets/css/style.css */
+
+.trackers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.trackers-list li {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.trackers-list li p {
+  margin: 5px 0;
+
+}
+
+.trackers-list li p span {
+  font-weight: bold;
+}
+
+.trackers-list li nav {
+  margin-top: 10px;
+}
+
+.trackers-list li .update {
+  margin-top: 10px;
+}
 
 
+.bill-activity {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #3367d6;
+}

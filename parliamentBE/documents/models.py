@@ -64,6 +64,7 @@ class File(models.Model):
     date = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField( editable=False,default=timezone.now)
     updated_at = models.DateTimeField( editable=False,default=timezone.now)
+    refdocument = models.CharField(max_length=255)
 
     def __str__(self):
         return str(self.name)
@@ -149,11 +150,17 @@ class BillTracker(models.Model):
     seconder = models.CharField(max_length=100, null=True, blank=True)
     status = models.CharField(max_length=100, null=True, blank=True)
     gazette_no = models.CharField(max_length=100)
-    
-    
+    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    function = models.CharField(max_length=255, null=True, blank=True,default="Legislation")
+    document = models.CharField(max_length=255, null=True, blank=True,default="Bills")
 
-    def __str__(self):
-        return self.name
+class BillTrackerActivity(models.Model):
+    BillTracker = models.ForeignKey(BillTracker, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    description = models.CharField(max_length=5000)
+    status = models.CharField(max_length=100)
+    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    
     
 
 class PetitionTracker(models.Model):
@@ -173,7 +180,7 @@ class PetitiontrackerActivity(models.Model):
     
 
 class MotionTracker(models.Model):
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField(default=timezone.now)
     subject = models.TextField(max_length=5000)
     proposer = models.CharField(max_length=100)
     seconder = models.CharField(max_length=100)

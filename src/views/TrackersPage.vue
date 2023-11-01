@@ -11,7 +11,7 @@
       </button>
     </div>
 
-    <nav class="tracker-buttons">
+    <div class="motion-list" v-if="showDiv === 'billtracker'">
       <ModalPopup
         v-if="showDiv === 'billtracker'"
         :buttonLabel="`Add Bill`"
@@ -25,148 +25,160 @@
         Test Bills
       </button>
 
-      <div v-if="showDiv === 'motiontracker'" class="motion-list">
-        <h2>Motions Tracker</h2>
-        <ModalPopup
-          buttonLabel="Add Motion"
-          :buttonClass="customButtonClass"
-          :iconClass="customIconClass"
-        >
-          <MotionTracker />
-        </ModalPopup>
-        <!-- Add your content for the Legislative Activities tracker here -->
-        <!-- {{motions}} -->
-        <div class="motion-list">
-          <ul>
-            <li v-for="motion in motions" :key="motion.id">
-              <p><span>Date:</span>{{ motion.date }}</p>
-              <p><span>Subject:</span>{{ motion.subject }}</p>
-              <p><span>Proposer:</span>{{ motion.proposer }}</p>
-              <p><span>Seconder:</span>{{ motion.seconder }}</p>
-              <button v-if="motion.status === 'adopted'" disabled>
-                Adopted
-              </button>
-              <button v-else @click="patchAdopt(motion)">Adopt Motion</button>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div v-if="showDiv === 'petitiontracker'" class="motion-list">
-        <h2>Petition Tracker</h2>
-        <ModalPopup
-          buttonLabel="Add Petition"
-          :buttonClass="customButtonClass"
-          :iconClass="customIconClass"
-        >
-          <PetitionTracker />
-        </ModalPopup>
-        <!-- Add your content for the Petition Tracker here -->
-        <div class="motion-list">
-          <ul>
-            <li v-for="motion in petitions" :key="motion.id">
-              <p><span>Date:</span>{{ motion.date }}</p>
-              <p><span>Subject:</span>{{ motion.subject }}</p>
-              <p><span>Presenter:</span>{{ motion.presenter }}</p>
-              <p><span>Petitioner:</span>{{ motion.petitioner }}</p>
-              
-              <nav>
+      <ul class="bill-ul">
+        <li v-for="document in tableref" :key="document.id">
+          <div class="bill-item">
+            <div class="bill-details">
+              <span class="bill-id">ID: {{ document.id }}</span>
+              <h2 class="bill-title">{{ document.name }}</h2>
+              <p class="bill-description">{{ document.description }}</p>
+              <span class="bill-date">Date: {{ document.date }}</span>
+              <span class="bill-status">Status: {{ document.status }}</span>
+              <span class="bill-maturity-date"
+                >Maturity Date: {{ document.maturity__date }}</span
+              >
+              <a
+                href="#"
+                class="view-details-link"
+                @click="
+                  this.$router.push({
+                    name: 'documents',
+                    params: { id: document.id },
+                  })
+                "
+              >
+                View Details
+              </a>
+            </div>
+            <nav class="bill-nav">
               <ModalPopup buttonLabel="Add Document">
                 <AddDocument />
               </ModalPopup>
+              <ModalPopup
+                :buttonLabel="`Update: ${document.description}`"
+                :buttonClass="customButtonClass"
+                :iconClass="customIconClass"
+              >
+                <BillActivity :billid="document.id" />
+              </ModalPopup>
             </nav>
-              <div class="update">
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div v-if="showDiv === 'motiontracker'" class="motion-list">
+      <h2>Motions Tracker</h2>
+      <ModalPopup
+        buttonLabel="Add Motion"
+        :buttonClass="customButtonClass"
+        :iconClass="customIconClass"
+      >
+        <MotionTracker />
+      </ModalPopup>
+
+      <ul class="motion-ul">
+        <li v-for="motion in motions" :key="motion.id" class="motion-item">
+          <div class="motion-details">
+            <span class="motion-date">Date: {{ motion.date }}</span>
+            <span class="motion-subject">Subject: {{ motion.subject }}</span>
+            <span class="motion-proposer">Proposer: {{ motion.proposer }}</span>
+            <span class="motion-seconder">Seconder: {{ motion.seconder }}</span>
+            <button
+              v-if="motion.status === 'adopted'"
+              class="adopted-button"
+              disabled
+            >
+              Adopted
+            </button>
+            <button v-else @click="patchAdopt(motion)" class="adopt-button">
+              Adopt Motion
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div v-if="showDiv === 'petitiontracker'" class="motion-list">
+      <h2>Petition Tracker</h2>
+      <ModalPopup
+        buttonLabel="Add Petition"
+        :buttonClass="customButtonClass"
+        :iconClass="customIconClass"
+      >
+        <PetitionTracker />
+      </ModalPopup>
+
+      <div>
+        <ul class="petition-ul">
+          <li
+            v-for="motion in petitions"
+            :key="motion.id"
+            class="petition-item"
+          >
+            <div class="petition-details">
+              <span class="petition-date">Date: {{ motion.date }}</span>
+              <span class="petition-subject"
+                >Subject: {{ motion.subject }}</span
+              >
+              <span class="petition-presenter"
+                >Presenter: {{ motion.presenter }}</span
+              >
+              <span class="petition-petitioner"
+                >Petitioner: {{ motion.petitioner }}</span
+              >
+              <nav class="petition-nav">
+                <ModalPopup buttonLabel="Add Document">
+                  <AddDocument />
+                </ModalPopup>
                 <ModalPopup
-                  buttonLabel="update Petition Status"
+                  :buttonLabel="`Add: ${motion.subject}`"
                   :buttonClass="customButtonClass"
                   :iconClass="customIconClass"
-                  @click="petionId = 'motion.id'"
+                >
+                  <FileActivities
+                    :fileid="motion.id"
+                    :title="motion.petitioner"
+                    :description="motion.subject"
+                  />
+                </ModalPopup>
+              </nav>
+              <div class="update">
+                <ModalPopup
+                  buttonLabel="Update Petition Status"
+                  :buttonClass="customButtonClass"
+                  :iconClass="customIconClass"
+                  @click="petionId = motion.id"
                 >
                   <div class="form-popup">
-                    <form @submit.prevent="addPetionActivity(motion)">
+                    <form @submit.prevent="addPetitionActivity(motion)">
                       <label for="status">Status:</label>
                       <select v-model="petitionActivity.status">
                         <option value="ongoing">Ongoing</option>
                         <option value="pending">Pending</option>
                         <option value="concluded">Concluded</option>
                       </select>
-                      <textarea name="description" id="" cols="30" rows="10" v-model="petitionActivity.description"></textarea>
+                      <textarea
+                        name="description"
+                        cols="30"
+                        rows="10"
+                        v-model="petitionActivity.description"
+                      ></textarea>
                       <button type="submit">Update</button>
                     </form>
                   </div>
                 </ModalPopup>
               </div>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+
     <div class="dashboard" v-if="showDiv === 'dashboard'">
       <h2>Dashboard</h2>
       <Dashboard />
     </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>name</th>
-          <th>Description</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>View Details</th>
-          <th>Maturity Date</th>
-          <th>Preview</th>
-          <th>Update</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="document in tableref" :key="document.id">
-          <td>{{ document.id }}</td>
-          <td>{{ document.name }}</td>
-          <td>{{ document.description }}</td>
-          <td>{{ document.date }}</td>
-
-          <!-- <td><a :href="document.file" target="_blank" class="document-link"><i
-                                        class="bi bi-cloud-download"></i> {{ document.name }}</a></td> -->
-          <td>{{ document.status }}</td>
-          <td>{{ document.maturity__date }}</td>
-
-          <td>
-            <a
-              href="#"
-              @click="
-                this.$router.push({
-                  name: 'documents',
-                  params: { id: document.id },
-                })
-              "
-              >View Details</a
-            >
-          </td>
-          <td>
-            <nav>
-              <ModalPopup buttonLabel="Add Document">
-                <AddDocument />
-              </ModalPopup>
-            </nav>
-          </td>
-
-          <td>
-            <ModalPopup
-              :buttonLabel="`update: ${document.description}`"
-              :buttonClass="customButtonClass"
-              :iconClass="customIconClass"
-            >
-              <FileActivities
-                :fileid="document.id"
-                :title="document.title"
-                :description="document.description"
-              />
-            </ModalPopup>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 
@@ -181,6 +193,7 @@ import AddDocument from "@/views/AddDocument.vue";
 import FileActivities from "@/views/FileActivities.vue";
 import { BillsSample } from "@/utils/BillsSample.js";
 import Dashboard from "@/views/DashboardPage.vue";
+import BillActivity from "@/views/BillTrackerActivity.vue";
 
 export default {
   components: {
@@ -191,6 +204,7 @@ export default {
     MotionTracker,
     FileActivities,
     Dashboard,
+    BillActivity,
   },
 
   data() {
@@ -211,14 +225,12 @@ export default {
     const tableref = ref([]);
     const petitionId = ref("");
 
-    const petitionActivity = reactive(
-      {
-        date: new Date(),
-        description: "",
-        status: "",
-        PetitionTracker: null,
-      },
-    );
+    const petitionActivity = reactive({
+      date: new Date(),
+      description: "",
+      status: "",
+      PetitionTracker: null,
+    });
 
     const getBills = async () => {
       const response = await axios.get("/billtrackers/");
@@ -239,16 +251,6 @@ export default {
       console.log("its running");
       if (showDiv.value === "billtracker") {
         const response = await axios.get("/billtrackers/");
-        tableref.value = response.data;
-      }
-
-      if (showDiv.value === "motiontracker") {
-        const response = await axios.get("/motiontrackers/");
-        tableref.value = response.data;
-      }
-
-      if (showDiv.value === "petitiontracker") {
-        const response = await axios.get("/petitiontrackers/");
         tableref.value = response.data;
       }
     };
@@ -273,13 +275,18 @@ export default {
     };
 
     const addPetionActivity = async (motion) => {
-
-
       console.log("petition", petitionActivity);
-      petitionActivity.PetitionTracker = motion.id
+      petitionActivity.PetitionTracker = motion.id;
 
-      const response = await axios.post("/petitionactivitytracker/", petitionActivity);
+      const response = await axios.post(
+        "/petitionactivitytracker/",
+        petitionActivity
+      );
+      const response2 = await axios.patch(`/petitiontrackers/${motion.id}/`, {
+        status: petitionActivity.status,
+      });
       console.log(response);
+      console.log(response2);
     };
 
     // Watch for changes in the `showDiv` prop and call `getDocuments` when it changes
