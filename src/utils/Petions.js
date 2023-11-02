@@ -1,6 +1,6 @@
 // Sample JSON Data
 const data = [
-  // ... (all the data you've provided)
+  
   {
     "0.": 1,
     presenter:
@@ -554,28 +554,31 @@ const data = [
   },
 ];
 
-// Function to convert date strings to JavaScript Date objects
-function convertDatesToObjects(data) {
-  const newData = data.map((item) => {
-    // Convert "DATE PRESENTED/CONVEYED" to Date object
-    const presentedDate = item["DATE PRESENTED/CONVEYED"]?.replace(/[^0-9/]/g, "");
-    item["DATE PRESENTED/CONVEYED"] = presentedDate ? new Date(presentedDate) : null;
-
-    // Convert "DATE DUE" to Date object
-    const dueDate = item["DATE DUE"]?.replace(/[^0-9/]/g, "");
-    item["DATE DUE"] = dueDate ? new Date(dueDate) : null;
-
-    return item;
-  });
-
-  return newData;
+// Function to extract and convert date format to YYYY-MM-DD
+function extractAndConvertDateFormat(dateString) {
+  const extractedDate = dateString.match(/\d{1,2}\/\d{1,2}\/\d{4}/);
+  if (extractedDate) {
+    const dateParts = extractedDate[0].split('/');
+    return `${dateParts[2]}-${dateParts[1].padStart(2, '0')}-${dateParts[0].padStart(2, '0')}`;
+  }
+  return "Invalid date format";
 }
 
-try {
-  const transformedData = convertDatesToObjects(data);
-  // Export the transformed data as a module
-  module.exports = { transformedData };
-} catch (error) {
-  console.error("Error converting dates:", error);
-}
+// Iterate through the data array, update keys, and change date format to YYYY-MM-DD
+const updatedData = data.map(item => {
+  const updatedItem = {
+    ...item,
+    date: extractAndConvertDateFormat(item["DATE PRESENTE D/CONVEY ED"]),
+    date_due: extractAndConvertDateFormat(item["DATE DUE"])
+  };
+  return updatedItem;
+});
+
+export { updatedData };
+
+// Display the updated data
+console.log(updatedData);
+
+
+
 

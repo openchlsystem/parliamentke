@@ -8,14 +8,14 @@
     <button @click="addMotions">Import Motions</button>
     <button @click="deleteMotions">Delete</button>
 
-    <!-- {{ transformedData }} -->
+    <!-- {{ updatedData }} -->
     <!-- {{ modifiedMotions }} -->
   </div>
 </template>
 
 <script>
 import { StandingOrders } from "@/utils/standingOrder";
-import { transformedData } from "@/utils/Petions";
+import { updatedData } from "@/utils/Petions";
 // import { convertNoticeOfMotionToDate } from "@/utils/Motions.js";
 // import {modifiedMotions} from "@/utils/";
 import {modifiedMotions} from "@/utils/Motions.js";
@@ -27,7 +27,7 @@ export default {
 
   setup() {
     const addPetitions = () => {
-      transformedData.forEach((petition) => {
+      updatedData.forEach((petition) => {
         axios.post("/petitiontrackers/", petition);
       });
     };
@@ -58,7 +58,7 @@ export default {
     return {
       StandingOrders,
       addStandingsOrdersArray,
-      transformedData,
+      updatedData,
       addPetitions,
       // convertNoticeOfMotionToDate,
       modifiedMotions,

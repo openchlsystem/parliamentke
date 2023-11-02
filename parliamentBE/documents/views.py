@@ -176,7 +176,7 @@ class DocumentIndexListCreateView(generics.ListCreateAPIView):
     queryset = DocumentIndex.objects.all()
     serializer_class = DocumentIndexSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['document', 'heirarchy']
+    filterset_fields = ['text_id', 'parent', 'document', 'heirarchy']
     
 class DocumentIndexDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = DocumentIndex.objects.all()

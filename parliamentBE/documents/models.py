@@ -140,13 +140,13 @@ class Category(models.Model):
 
 
 class BillTracker(models.Model):
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField(null=True, blank=True)
     serialno = models.CharField(max_length=100)
     bill = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     sponsor = models.CharField(max_length=100)
     billnumber = models.CharField(max_length=100)
-    maturity_date = models.DateTimeField(default=timezone.now)
+    maturity_date = models.DateField(null=True, blank=True)
     seconder = models.CharField(max_length=100, null=True, blank=True)
     status = models.CharField(max_length=100, null=True, blank=True)
     gazette_no = models.CharField(max_length=100)
@@ -164,11 +164,11 @@ class BillTrackerActivity(models.Model):
     
 
 class PetitionTracker(models.Model):
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField(null=False, blank=False)
     presenter = models.CharField(max_length=100)
     petitioner = models.CharField(max_length=100)
     subject = models.CharField(max_length=5000)
-    date_due = models.DateTimeField(default=timezone.now)
+    date_due = models.DateField(null=False, blank=False)
     status = models.CharField(max_length=100, default="new")
     
 class PetitiontrackerActivity(models.Model):

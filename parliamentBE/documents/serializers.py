@@ -2,7 +2,7 @@ from rest_framework import serializers
 from documents.models import *
 
 class FileSerializer(serializers.ModelSerializer):
-    date = serializers.DateField(format='%d/%m/%Y', input_formats=['%d/%m/%Y', 'iso-8601'])
+
 
     class Meta:
         model = File
@@ -67,7 +67,7 @@ class BillTrackerActivitySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PetitionTrackerSerializer(serializers.ModelSerializer):
-    date = serializers.DateField(format='%d/%m/%Y', input_formats=['%d/%m/%Y', 'iso-8601'])
+    # date = serializers.DateField(format='%d/%m/%Y', input_formats=['%d/%m/%Y', 'iso-8601'])
 
     class Meta:
         model = PetitionTracker

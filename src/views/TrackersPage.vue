@@ -11,19 +11,19 @@
       </button>
     </div>
 
+
+
     <div class="motion-list" v-if="showDiv === 'billtracker'">
-      <ModalPopup
-        v-if="showDiv === 'billtracker'"
-        :buttonLabel="`Add Bill`"
-        :buttonClass="customButtonClass"
-        :iconClass="customIconClass"
-      >
+      <ModalPopup v-if="showDiv === 'billtracker'" :buttonLabel="`Add Bill`" :buttonClass="customButtonClass"
+        :iconClass="customIconClass">
         <BillsTracker />
         <h2>Bills</h2>
       </ModalPopup>
       <button v-if="showDiv === 'billtracker'" @click="importBills">
         Test Bills
       </button>
+
+      <!-- {{BillsSample}} -->
 
       <ul class="bill-ul">
         <li v-for="document in tableref" :key="document.id">
@@ -34,19 +34,13 @@
               <p class="bill-description">{{ document.description }}</p>
               <span class="bill-date">Date: {{ document.date }}</span>
               <span class="bill-status">Status: {{ document.status }}</span>
-              <span class="bill-maturity-date"
-                >Maturity Date: {{ document.maturity__date }}</span
-              >
-              <a
-                href="#"
-                class="view-details-link"
-                @click="
-                  this.$router.push({
-                    name: 'documents',
-                    params: { id: document.id },
-                  })
-                "
-              >
+              <span class="bill-maturity-date">Maturity Date: {{ document.maturity__date }}</span>
+              <a href="#" class="view-details-link" @click="
+                this.$router.push({
+                  name: 'documents',
+                  params: { id: document.id },
+                })
+                ">
                 View Details
               </a>
             </div>
@@ -54,11 +48,8 @@
               <ModalPopup buttonLabel="Add Document">
                 <AddDocument />
               </ModalPopup>
-              <ModalPopup
-                :buttonLabel="`Update: ${document.description}`"
-                :buttonClass="customButtonClass"
-                :iconClass="customIconClass"
-              >
+              <ModalPopup :buttonLabel="`Update: ${document.description}`" :buttonClass="customButtonClass"
+                :iconClass="customIconClass">
                 <BillActivity :billid="document.id" />
               </ModalPopup>
             </nav>
@@ -69,11 +60,7 @@
 
     <div v-if="showDiv === 'motiontracker'" class="motion-list">
       <h2>Motions Tracker</h2>
-      <ModalPopup
-        buttonLabel="Add Motion"
-        :buttonClass="customButtonClass"
-        :iconClass="customIconClass"
-      >
+      <ModalPopup buttonLabel="Add Motion" :buttonClass="customButtonClass" :iconClass="customIconClass">
         <MotionTracker />
       </ModalPopup>
 
@@ -84,11 +71,7 @@
             <span class="motion-subject">Subject: {{ motion.subject }}</span>
             <span class="motion-proposer">Proposer: {{ motion.proposer }}</span>
             <span class="motion-seconder">Seconder: {{ motion.seconder }}</span>
-            <button
-              v-if="motion.status === 'adopted'"
-              class="adopted-button"
-              disabled
-            >
+            <button v-if="motion.status === 'adopted'" class="adopted-button" disabled>
               Adopted
             </button>
             <button v-else @click="patchAdopt(motion)" class="adopt-button">
@@ -101,55 +84,30 @@
 
     <div v-if="showDiv === 'petitiontracker'" class="motion-list">
       <h2>Petition Tracker</h2>
-      <ModalPopup
-        buttonLabel="Add Petition"
-        :buttonClass="customButtonClass"
-        :iconClass="customIconClass"
-      >
+      <ModalPopup buttonLabel="Add Petition" :buttonClass="customButtonClass" :iconClass="customIconClass">
         <PetitionTracker />
       </ModalPopup>
 
       <div>
         <ul class="petition-ul">
-          <li
-            v-for="motion in petitions"
-            :key="motion.id"
-            class="petition-item"
-          >
+          <li v-for="motion in petitions" :key="motion.id" class="petition-item">
             <div class="petition-details">
               <span class="petition-date">Date: {{ motion.date }}</span>
-              <span class="petition-subject"
-                >Subject: {{ motion.subject }}</span
-              >
-              <span class="petition-presenter"
-                >Presenter: {{ motion.presenter }}</span
-              >
-              <span class="petition-petitioner"
-                >Petitioner: {{ motion.petitioner }}</span
-              >
+              <span class="petition-subject">Subject: {{ motion.subject }}</span>
+              <span class="petition-presenter">Presenter: {{ motion.presenter }}</span>
+              <span class="petition-petitioner">Petitioner: {{ motion.petitioner }}</span>
               <nav class="petition-nav">
                 <ModalPopup buttonLabel="Add Document">
                   <AddDocument />
                 </ModalPopup>
-                <ModalPopup
-                  :buttonLabel="`Add: ${motion.subject}`"
-                  :buttonClass="customButtonClass"
-                  :iconClass="customIconClass"
-                >
-                  <FileActivities
-                    :fileid="motion.id"
-                    :title="motion.petitioner"
-                    :description="motion.subject"
-                  />
+                <ModalPopup :buttonLabel="`Add: ${motion.subject}`" :buttonClass="customButtonClass"
+                  :iconClass="customIconClass">
+                  <FileActivities :fileid="motion.id" :title="motion.petitioner" :description="motion.subject" />
                 </ModalPopup>
               </nav>
               <div class="update">
-                <ModalPopup
-                  buttonLabel="Update Petition Status"
-                  :buttonClass="customButtonClass"
-                  :iconClass="customIconClass"
-                  @click="petionId = motion.id"
-                >
+                <ModalPopup buttonLabel="Update Petition Status" :buttonClass="customButtonClass"
+                  :iconClass="customIconClass" @click="petionId = motion.id">
                   <div class="form-popup">
                     <form @submit.prevent="addPetitionActivity(motion)">
                       <label for="status">Status:</label>
@@ -158,12 +116,7 @@
                         <option value="pending">Pending</option>
                         <option value="concluded">Concluded</option>
                       </select>
-                      <textarea
-                        name="description"
-                        cols="30"
-                        rows="10"
-                        v-model="petitionActivity.description"
-                      ></textarea>
+                      <textarea name="description" cols="30" rows="10" v-model="petitionActivity.description"></textarea>
                       <button type="submit">Update</button>
                     </form>
                   </div>
@@ -192,6 +145,7 @@ import axios from "@/utils/axios";
 import AddDocument from "@/views/AddDocument.vue";
 import FileActivities from "@/views/FileActivities.vue";
 import { BillsSample } from "@/utils/BillsSample.js";
+import { updatedBillsSample } from "@/utils/BillsSample.js";
 import Dashboard from "@/views/DashboardPage.vue";
 import BillActivity from "@/views/BillTrackerActivity.vue";
 
@@ -256,14 +210,19 @@ export default {
     };
 
     const importBills = async () => {
-      BillsSample.forEach((bill) => {
-        bill.description = bill.bill;
-        bill.date = new Date().toISOString();
-        bill.maturity_date = new Date().toISOString();
-        axios.post("/billtrackers/", bill);
-      });
+      // BillsSample.forEach((bill) => {
+      //   bill.description = bill.bill;
+      //   bill.date = new Date().toISOString();
+      //   bill.maturity_date = new Date().toISOString();
+      //   axios.post("/billtrackers/", bill);
+      // });
       // const response = await axios.get("/billtrackers/");
       // bills.value = response.data;
+      updatedBillsSample.forEach((bill) => {
+        bill.description = bill.bill;
+
+        axios.post("/billtrackers/", bill);
+      })
       console.log("hey man bill have been imported");
     };
 
@@ -285,8 +244,7 @@ export default {
       const response2 = await axios.patch(`/petitiontrackers/${motion.id}/`, {
         status: petitionActivity.status,
       });
-      console.log(response);
-      console.log(response2);
+      response, response2
     };
 
     // Watch for changes in the `showDiv` prop and call `getDocuments` when it changes
@@ -315,6 +273,7 @@ export default {
       petitionActivity,
       addPetionActivity,
       petitionId,
+      updatedBillsSample,
     };
   },
 };

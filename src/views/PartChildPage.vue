@@ -1,12 +1,11 @@
 <template>
   <div>
     <h1>Part Child {{ mytextid }}</h1>
-    <!-- <p>{{ partList }}</p> -->
-    <!-- {{ documentlist }} -->
     <div class="heirarchy">
       <ul>
-        <li v-for="item in partList" :key="item.text_id" @click="toggleItem(item)">
+        <li v-for="item in filteredPartList" :key="item.text_id" @click="toggleItem(item)">
           {{ item.content }}
+
           <div v-if="item.open">
             <HeaderChild :text_id="item.text_id" :documentlist="documentlist" />
           </div>
@@ -16,13 +15,14 @@
         </li>
       </ul>
     </div>
+    {{  }}
   </div>
 </template>
 
 <script>
-import { computed } from "vue";
-import HeaderChild from './HeaderChildPage.vue'
-// import { useStore } from "vuex";
+import { computed, ref, watch } from "vue";
+import HeaderChild from './HeaderChildPage.vue';
+
 export default {
   props: {
     text_id: {
@@ -40,27 +40,39 @@ export default {
   },
 
   setup(props) {
-    // const partList = ref([]);
-    // const store = useStore;
-
-    const partList = computed(() =>
-      props.documentlist?.filter(
-        (item) => item.heirarchy === "Part" && item.parent === props.text_id
-      ) ?? []
-    );
+    const documentlist = ref(props.documentlist);
+    const filteredPartList = computed(() => {
+      const textId = props.text_id;
+      if (documentlist.value && textId) {
+        return documentlist.value.filter(item => item.heirarchy === "Part" && item.parent === textId);
+      }
+      return [];
+    });
 
     const toggleItem = (item) => {
       item.open = !item.open;
-    /**
-     * Toggles the open state of an item.
-     *
-     * @param {Object} item - The item to toggle.
-     */
     };
 
+    const mytextid = computed(() => props.text_id);
+
+    watch([mytextid, documentlist], ([textId, docList]) => {
+      if (textId && docList) {
+        filteredPartList.value = docList.filter(item => item.heirarchy === "Part" && item.parent === textId);
+        console.log("filteredPartList", filteredPartList.value);
+        console.log("textId", textId);
+        console.log("docList", docList);
+      } else {
+        filteredPartList.value = [];
+        console.log("filteredPartList", filteredPartList.value);
+        console.log("textId", textId);
+        console.log("docList", docList);
+      }
+    });
+
     return {
-      mytextid: computed(() => props.text_id),
-        partList,
+      mytextid,
+      // documentlist,
+      filteredPartList,
       toggleItem
     };
   },

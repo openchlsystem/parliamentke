@@ -5,22 +5,22 @@
 
     <div class="header-buttons">
       <select name="documentname" id="" v-model="selectedDocument">
-        <option
-          :value="document.text_id"
-          v-for="document in documents"
-          :key="document.id"
-        >
+        <option value="" disabled selected>Select Document</option>
+        <option :value="document" v-for="document in documents" :key="document.id">
           {{ document.document }}
         </option>
       </select>
 
-      {{ selectedDocument }}
       <input type="text" placeholder="Search..." />
     </div>
+    {{ selectedDocument.document ?? "Select Document" }}
+
     <!-- search input  -->
 
+    <!-- {{ documentlist }} -->
+
     <div class="child-items">
-      <PartChild :text_id="selectedDocument" :documentlist="documentlist" />
+      <PartChild :text_id="selectedDocument.text_id" :documentlist="documentlist" />
     </div>
   </div>
 </template>
@@ -42,7 +42,10 @@ export default {
     const store = useStore();
     const documentData = ref(null);
     const documents = ref([]);
-    const selectedDocument = ref(null);
+    const selectedDocument = ref([]);
+    // const selecttedDocumentType = JSON.parse(selectedDocument.value);
+    // const selecttedDocumentType = JSON.parse(selectedDocument.value || '{}');
+
 
     const commitDocumentIndex = async () => {
       const response = await axios.get("/DocumentIndex/");
@@ -87,6 +90,9 @@ export default {
       getUniqueByDocument,
       documents,
       selectedDocument,
+      documentData,
+      commitDocumentIndex,
+      // selecttedDocumentType,
     };
   },
 };
