@@ -255,6 +255,7 @@ export default {
       const response = await axios.patch(`/motiontrackers/${motion.id}/`, {
         status: "adopted",
       });
+      getMotions();
       console.log(response);
     };
 

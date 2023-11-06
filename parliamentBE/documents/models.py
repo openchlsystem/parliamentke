@@ -191,7 +191,8 @@ class MotionTracker(models.Model):
 
 
 class DocumentIndex(models.Model):
-    text_id = models.AutoField(primary_key=True, editable=False, unique=True)
+    text_id = models.AutoField(primary_key=True, editable=True, unique=True)
+    date = models.DateTimeField(default=timezone.now)
     date = models.DateTimeField(default=timezone.now)
     
     # Define choices for the 'document' field
@@ -214,3 +215,24 @@ class DocumentIndex(models.Model):
     
     content = models.CharField(max_length=10000)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+
+
+class Members(models.Model):
+    name = models.CharField(max_length=255)
+    constituency  = models.CharField(max_length=255)
+    party = models.CharField(max_length=255)
+    image = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    
+
+
+
+
+# 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+class committees(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    
+    
+class CommitteeMembers(models.Model):
+    members = models.ForeignKey(Members, on_delete=models.CASCADE)
+    committee = models.ForeignKey(committees, on_delete=models.CASCADE)

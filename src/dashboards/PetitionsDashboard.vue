@@ -1,5 +1,5 @@
 <template>
-  <h2>Kenya Parliament Dashboard</h2>
+
 
   <div class="metric-area">
     <div class="side-panel">

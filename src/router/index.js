@@ -52,6 +52,18 @@ const routes = [
     name: "documentsearch",
     component: () => import("../views/DocumentListPage.vue"),
   },
+  {
+    path: "/members",
+    name: "members",
+    component: () => import("../views/MembersPage.vue"),
+  },
+  {
+    path: "/committees",
+    name: "committees",
+    component: () => import("../views/CommitteesPage.vue"),
+  },
+
+
 ];
 
 const router = createRouter({

@@ -40,5 +40,15 @@ urlpatterns = [
 
     path('DocumentIndex/', DocumentIndexListCreateView.as_view(), name='documentindex'),
     path('DocumentIndex/<int:pk>/', DocumentIndexDetailView.as_view(), name='documentindex-detail'),
+    
+    path('members/', MembersListCreateView.as_view(), name='member-list-create'),
+    path('members/<int:pk>/', MembersDetailView.as_view(), name='member-detail'),
+
+    
+    path('committees/', CommitteeListCreateView.as_view(), name='committees-list-create'),
+    path('committees/<int:pk>/', CommitteeDetailView.as_view(), name='committees-detail'),
+    
+    path('committeesmembers/', CommitteeMembersListCreateView.as_view(), name='committeesmembers-list-create'),
+    path('committeesmembers/<int:pk>/', CommitteeMembersDetailView.as_view(), name='committeesmembers-detail'),
    
 ]

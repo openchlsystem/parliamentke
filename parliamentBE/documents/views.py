@@ -179,3 +179,43 @@ class DocumentIndexListCreateView(generics.ListCreateAPIView):
 class DocumentIndexDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = DocumentIndex.objects.all()
     serializer_class = DocumentIndexSerializer
+
+
+class MembersListCreateView(generics.ListCreateAPIView):
+    queryset = Members.objects.all()
+    serializer_class = MembersSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name', 'constituency', 'party','id']
+    
+    
+class MembersDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Members.objects.all()
+    serializer_class = MembersSerializer
+    
+
+    
+    
+class CommitteeListCreateView(generics.ListCreateAPIView):
+    queryset = committees.objects.all()
+    serializer_class = CommitteesSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'name']
+    
+
+class CommitteeDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = committees.objects.all()
+    serializer_class = CommitteesSerializer
+    
+
+class CommitteeMembersListCreateView(generics.ListCreateAPIView):
+    queryset = CommitteeMembers.objects.all()
+    serializer_class = CommitteeMembersSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'members', 'committee']
+    
+
+class CommitteeMembersDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CommitteeMembers.objects.all()
+    serializer_class = CommitteeMembersSerializer
+
+

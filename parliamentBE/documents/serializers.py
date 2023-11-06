@@ -91,3 +91,24 @@ class DocumentIndexSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocumentIndex
         fields = '__all__'
+
+
+class MembersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Members
+        fields = '__all__'
+        
+        
+
+        
+        
+class CommitteesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = committees
+        fields = '__all__'
+
+
+class CommitteeMembersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommitteeMembers
+        fields = '__all__'
