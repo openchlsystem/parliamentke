@@ -116,12 +116,10 @@ class BillTrackerDetailView(generics.RetrieveUpdateDestroyAPIView):
 class BillTrackerListCreateView(generics.ListCreateAPIView):
     queryset = BillTracker.objects.all()
     serializer_class = BillTrackerSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'serialno', 'bill', 'sponsor']
+    filter_backends = [DjangoFilterBackend] 
+    filterset_fields = ['id', 'status', 'sponsor']
     
-class BillTrackerListCreateView(generics.ListCreateAPIView):
-    queryset = BillTracker.objects.all()
-    serializer_class = BillTrackerSerializer
+
 
 class BillTrackerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = BillTracker.objects.all()
@@ -145,7 +143,7 @@ class PetitionTrackerListCreateView(generics.ListCreateAPIView):
     queryset = PetitionTracker.objects.all()
     serializer_class = PetitionTrackerSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'presenter', 'petitioner']
+    filterset_fields = ['id', 'presenter', 'petitioner', 'status']
     
 
 class PetitionTrackerDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -166,7 +164,7 @@ class MotionTrackerListCreateView(generics.ListCreateAPIView):
     queryset = MotionTracker.objects.all()
     serializer_class = MotionTrackerSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'subject', 'proposer']
+    filterset_fields = ['id', 'subject', 'proposer', 'seconder', 'status']
     
 class MotionTrackerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = MotionTracker.objects.all()

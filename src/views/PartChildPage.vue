@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Part Child {{ mytextid }}</h1>
+  <!-- <div>
+    <h1>Part Child Monitoring {{ mytextid }}</h1>
     <div class="heirarchy">
       <ul>
         <li v-for="item in filteredPartList" :key="item.text_id" @click="toggleItem(item)">
@@ -16,11 +16,21 @@
       </ul>
     </div>
     {{  }}
-  </div>
+  </div> -->
+  <!-- make the above code an accordion  -->
+    <div class="accordion">
+      <div class="accordion-item" v-for="item in filteredPartList" :key="item.text_id">
+        <h3 class="accordion-title" @click="toggleItem(item)">{{ item.content }}</h3>
+        <div class="accordion-content" v-if="item.open">
+          <HeaderChild :text_id="item.text_id" :documentlist="documentlist" />
+        </div>
+      </div>
+    </div>
+    
 </template>
 
 <script>
-import { computed, ref, watch } from "vue";
+import { computed, watch } from "vue";
 import HeaderChild from './HeaderChildPage.vue';
 
 export default {
@@ -40,11 +50,13 @@ export default {
   },
 
   setup(props) {
-    const documentlist = ref(props.documentlist);
+    const documentlist = computed(() => {
+      return props.documentlist;
+    })
     const filteredPartList = computed(() => {
       const textId = props.text_id;
       if (documentlist.value && textId) {
-        return documentlist.value.filter(item => item.heirarchy === "Part" && item.parent === textId);
+        return documentlist.value.filter(item => item.parent === textId);
       }
       return [];
     });
@@ -56,6 +68,8 @@ export default {
     const mytextid = computed(() => props.text_id);
 
     watch([mytextid, documentlist], ([textId, docList]) => {
+      console.log("textId", textId);
+      console.log("docList", docList);
       if (textId && docList) {
         filteredPartList.value = docList.filter(item => item.heirarchy === "Part" && item.parent === textId);
         console.log("filteredPartList", filteredPartList.value);

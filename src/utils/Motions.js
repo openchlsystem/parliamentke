@@ -8,6 +8,7 @@ export const modifiedMotions = [
     status: "Adopted",
   },
   {
+    
     date: "14/02/2023",
     subject:
       "THAT, pursuant to the provisions of Standing Order 171(1)(f), this House approves the appointment of the following Members to the House Business Committee in addition to those specified under paragraphs (a), (b), (c), (d) and (e) – (i) The Hon. Omboko Milemba, M.P. (ii) The Hon. Robert Mbui, CBS, M.P. (iii) The Hon. Faith Wairimu Gitau, M.P. (iv) The Hon. Samuel K. Chepkonga, CBS, M.P. (v) The Hon. Adan Wehliye Keynan, CBS, M.P. (vi) The Hon. Tom Joseph Francis Kajwang’, M.P. (vii) The Hon. Sarah Paulata Korere, M.P.,(viii) The Hon. Joshua Mbithi Mwalyo, M.P.(ix) The Hon. Umul Ker Kassim Sheikh, M.P.",

@@ -148,7 +148,7 @@ class BillTracker(models.Model):
     billnumber = models.CharField(max_length=100)
     maturity_date = models.DateField(null=True, blank=True)
     seconder = models.CharField(max_length=100, null=True, blank=True)
-    status = models.CharField(max_length=100, null=True, blank=True)
+    status = models.CharField(max_length=100, default="new")
     gazette_no = models.CharField(max_length=100)
     file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
     function = models.CharField(max_length=255, null=True, blank=True,default="Legislation")
@@ -164,11 +164,11 @@ class BillTrackerActivity(models.Model):
     
 
 class PetitionTracker(models.Model):
-    date = models.DateField(null=False, blank=False)
+    date = models.DateField(default=timezone.now)
     presenter = models.CharField(max_length=100)
     petitioner = models.CharField(max_length=100)
     subject = models.CharField(max_length=5000)
-    date_due = models.DateField(null=False, blank=False)
+    date_due = models.DateField(default=timezone.now)
     status = models.CharField(max_length=100, default="new")
     
 class PetitiontrackerActivity(models.Model):

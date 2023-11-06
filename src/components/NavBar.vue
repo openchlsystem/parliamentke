@@ -1,55 +1,53 @@
 <template>
-  <div>
+
     <nav>
-      <router-link to="/">Home</router-link> |
-      <!-- <div class="dropdown">
-        <router-link to="/about">House Business</router-link>
-        <div class="dropdown-content">
-          <router-link to="/about">Standing Orders</router-link>
-          <router-link to="/about">Rulings</router-link>
-          <router-link to="/about">Committees</router-link>
-        </div>
-      </div> -->
-      <router-link to="/dashboard">Dashboard</router-link> |
-        <router-link to="/about">Debate</router-link> |
+      <div class="menu">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/dashboard">Dashboard</router-link> |
+        <!-- <router-link to="/about">Debate</router-link> | -->
         <router-link to="/trackers">Trackers</router-link> |
-      <div class="dropdown">
-        <router-link to="/backend">Back Office</router-link>
-        <!-- <div class="dropdown-content">
-          <router-link to="/about">Inbox</router-link>
-          <router-link to="/about">Operations</router-link>
-          <router-link to="/about">Notifications</router-link>
-          <router-link to="/about">Notification Committees</router-link>
-          <router-link to="/about">Stages</router-link>
-        </div> -->
+        <router-link to="/trackers">Commitees</router-link> |
+        <router-link to="/OrderPaper">House Business</router-link>|
+        <router-link to="/OrderPaper">Members</router-link>|
+        <router-link to="/backend">Back Office</router-link> |
       </div>
-
-       <div class="dropdown">
-          <router-link to="/backend">Settings</router-link>
-          <div class="dropdown-content">
-          <router-link to="/about">Parliament Functions</router-link>
-          <router-link to="/about">Legistative Activities</router-link>
-          <router-link to="/about">Legislation Documents</router-link>
-          <router-link to="/about">Standing Order Ammendment</router-link>
-          <router-link to="/about">Stages</router-link>
-        </div>
-        </div>
-
+      <button class="dropdown-toggle" @click="toggleDropdown">
+        {{ dropdownLabel }}
+      </button>
+      <ul
+        class="dropdown-menu"
+        :style="{ display: dropdownOpen ? 'block' : 'none' }"
+      >
+        <li  @click="toggleDropdown"><router-link to="/">Home</router-link></li>
+        <li @click="toggleDropdown"><router-link to="/dashboard">Dashboard</router-link></li>
+        <li @click="toggleDropdown"><router-link to="/trackers">Trackers</router-link></li>
+        <li @click="toggleDropdown"><router-link to="/trackers">Commitees</router-link></li>
+        <li @click="toggleDropdown"><router-link to="/OrderPaper">House Business</router-link></li>
+        <li @click="toggleDropdown"><router-link to="/OrderPaper">Members</router-link></li>
+        <li @click="toggleDropdown"><router-link to="/backend">Back Office</router-link></li>
+      </ul>
     </nav>
 
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'NavBar',
-
-  setup() {
-
-
-    return {}
-  }
-}
+  data() {
+    return {
+      dropdownOpen: false,
+    };
+  },
+  computed: {
+    dropdownLabel() {
+      return this.dropdownOpen ? "Close" : "Menu";
+    },
+  },
+  methods: {
+    toggleDropdown() {
+      this.dropdownOpen = !this.dropdownOpen;
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

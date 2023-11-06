@@ -85,13 +85,12 @@
 .layout {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
   background-color: var(--background-color);
   padding: 10px;
-  overflow: hidden;
+  margin: 0;
+  height: 100vh;
 }
 
 .header {
@@ -101,7 +100,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
+  z-index: 9999;
 }
 
 .header a {
@@ -113,9 +113,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 60px;
   background-color: var(--background-color);
   width: 100%;
-  margin-top: 50px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+/* make layout mobile responsive  */
+
+/* Mobile Responsive */
+@media (max-width: 767px) {
+  .layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .body {
+    width: 100%;
+    padding: 20px;
+    display: block;
+    margin: 10px;
+  }
+
+  .footer {
+    display: none;
+  }
 }
 
 /* FOOTER CSS  */
@@ -684,14 +710,23 @@ nav {
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
+  right: 0;
   gap: 10px;
   text-transform: capitalize;
+  width: 100%;
+  margin: 20px;
 }
 
 nav router-link {
   text-decoration: none;
   color: #fff;
   margin-right: 10px;
+}
+
+.menu {
+  display: flex;
+  gap: 10px;
+  margin-right: auto;
 }
 
 .dropdown {
@@ -711,6 +746,54 @@ nav router-link {
 .dropdown:hover .dropdown-content {
   display: flex;
   flex-direction: column;
+}
+
+/* responsive menue  */
+
+.dropdown-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+  .dropdown-toggle {
+    display: block;
+    margin-right: 30px;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #54c442;
+    padding: 10px;
+    border: 1px solid #ccc;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-menu li {
+    margin-bottom: 5px;
+
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    text-align: left;
+  }
+
+  .dropdown-menu li a:hover {
+    background-color: #f5f5f5;
+  }
 }
 
 /* END OF DROP DOWN */
@@ -763,12 +846,14 @@ nav router-link {
 
 .search {
   position: relative;
-  width: 800px;
+  max-width: 900px;
+  width: 100%;
   height: auto;
-  margin: 10px 0;
-  border: 10px solid --border-color;
+  margin: 10px auto;
+
+  padding: 20px;
   border-radius: 20px;
-  padding: var(--paddings-large);
+  /* padding: var(--paddings-large); */
   background-color: var(--background-color);
   display: flex;
   align-items: center;
@@ -776,19 +861,24 @@ nav router-link {
   z-index: 999;
   display: flex;
   flex-direction: column;
+  margin-top: 60px;
 }
 
 .search-home {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 20px;
-  height: 30px;
+  padding: 20px;
+  margin: 20px;
   width: 100%;
+  color: #000;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-top: 60px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
 }
 
 .microphone {
   position: absolute;
-  top: 50%;
+  top: 80%;
   right: 10px;
   transform: translateY(-50%);
   background: none;
@@ -1109,6 +1199,8 @@ li:hover {
 .calendar-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
+  
 }
 
 .day-header {
@@ -1145,6 +1237,42 @@ li:hover {
   margin: 2px 0;
 }
 
+/* make calender responsive */
+
+@media (max-width: 768px) {
+  .calendar {
+    flex-direction: column;
+  }
+
+  .current-month {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .calendar-table {
+    width: 100%;
+  }
+
+  .calendar-row {
+    display: block;
+  }
+
+  .calendar-cell {
+    flex-basis: 100%;
+    padding: 5px;
+    border-bottom: none;
+  }
+
+  .date {
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
+
+  .activity {
+    margin-bottom: 3px;
+  }
+}
+
 /* Trackers  */
 
 .trackers {
@@ -1153,11 +1281,11 @@ li:hover {
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 60px;
   width: 100%;
   height: 100vh;
   overflow: auto;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .trackers h2 {
@@ -1222,33 +1350,135 @@ li:hover {
 
 /* fancy dashboard */
 
+.main-dashboard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  margin: 5px;
+  margin-top: 60px;
+}
+
 /* Add your styles for the dashboard, metric cards, and charts */
 .dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  margin: 0;
+  /* margin-top: 50px; */
+
   /* Add more styling for the dashboard as needed */
+}
+
+.main-canvas {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+
+  /* Add more styling for the main canvas as needed */
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  flex: 1;
+  /* Add more styling for the side panel as needed */
+}
+
+.metric-area {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  align-items: center;
+  margin-top: 50px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  overflow: scroll;
+  flex: 3;
+  margin: 50px;
+  z-index: 999;
+
+  /* Add more styling for the metric area as needed */
+}
+
+.metric-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: space-evenly;
+  width: 100%;
+  background-color: #f6f6f8;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 100vh;
+  overflow: scroll;
+  flex: 5;
+  padding-top: 100px;
+}
+
+.calender_area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  height: 100vh;
+  overflow: scroll;
+  flex: 2;
+  border: 1px solid #ccc;
+  /* margin-top: 50px; */
 }
 
 .metric-cards {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   margin-bottom: 20px;
+  margin-top: 20px;
+  width: 100%;
+  height: auto;
   /* Add styling for the metric cards section */
 }
 
 .metric-card {
-  padding: 20px;
-  border: 1px solid #ccc;
+  padding: 40px;
+  width: 80px;
+  height: 100px;
+  border: 5px solid #fff;
+
   border-radius: 10px;
   margin: 0 10px;
-  text-align: center;
+  margin-top: 20px;
+  text-align: left;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  flex: 1;
 }
 
 .metric-card:hover {
@@ -1259,20 +1489,22 @@ li:hover {
 /* Styles for headings and paragraph inside the metric cards */
 .metric-card h3 {
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 14px;
   color: #333;
+  padding: 10px;
 }
 
 .metric-card p {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   color: #555;
+  padding: 10px;
 }
 .charts {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
+  align-items: space-evenly;
   /* margin-top: 20px; */
   margin-bottom: 20px;
   width: 100%;
@@ -1283,15 +1515,93 @@ li:hover {
 }
 
 .dashboard-item {
-  width: 45%;
+  width: 100%;
+  height: auto;
   min-height: 300px;
-  margin: 10px;
+  margin: 20px;
   padding: 20px;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
   /* Add styles for individual chart items */
 }
+/* make dshboard responsive  */
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    height: auto;
+    overflow: scroll;
+  }
+
+  .metric-area {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    height: auto;
+    overflow: scroll;
+  }
+
+  .side-panel {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    height: auto;
+    overflow: scroll;
+    order: 3;
+  }
+
+  .metric-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    height: auto;
+    overflow: scroll;
+    order: 1;
+  }
+  .calender-area {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    height: auto;
+    overflow: scroll;
+    order: 2;
+  }
+
+  .calendar {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    height: auto;
+    overflow: scroll;
+    order: 2;
+    width: 100%;
+    background-color: #fff;
+  }
+}
+
+/* end of dashbogard */
 
 /* Modal Button */
 
@@ -1495,111 +1805,171 @@ li:hover {
 /* CSS for the Library-style Bill Tracker Section */
 /* CSS for the Motions Tracker Styled Similar to Library Theme */
 .motion-list {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  margin: 20px;
+  padding: 0;
+  background-color: #f6f6f8;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .motion-ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .motion-item {
-    background-color: #f5f5f5;
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .motion-details {
-    margin-bottom: 15px;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  flex-basis: 75%;
+  margin-bottom: 15px;
 }
 
 .motion-details span {
-    display: block;
-    margin-bottom: 5px;
-    font-style: italic;
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
 }
 
-.adopted-button, .adopt-button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+.motion-subject {
+  font-weight: normal;
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.motion-proposer,
+.motion-seconder,
+.motion-date {
+  font-weight: bold;
+}
+
+.adopted-button,
+.adopt-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .adopted-button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
 .adopted-button {
-    background-color: #3498db;
-    color: #fff;
+  background-color: #3498db;
+  color: #fff;
 }
 
 .adopt-button {
-    background-color: #27ae60;
-    color: #fff;
+  background-color: #27ae60;
+  color: #fff;
 }
 
 /* Adjust the button popup and modal styles if necessary */
 /* CustomButtonClass */
 /* CustomIconClass */
 
+.bill-ul {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+  background-color: #f6f6f8;
+}
+
+.bill-ul li {
+  margin-bottom: 10px;
+  /* padding: 10px; */
+  border-radius: 5px;
+  background-color: #f6f6f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .bill-item {
-    background-color: #f5f5f5;
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  background-color: #f6f6f6;
+  margin-bottom: 20px;
+  /* padding: 20px; */
+  border: 5px solid #fff;
+  border-radius: 8px;
 }
 
 .bill-details {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* width: 100%; */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bill-details a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.bill-status {
+  font-weight: bold;
+  color: #27ae60;
 }
 
 .bill-title {
-    font-size: 22px;
-    margin: 10px 0;
+  font-size: 28px;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #2c3e50;
 }
 
 .bill-description {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .bill-id,
 .bill-date,
 .bill-status,
 .bill-maturity-date {
-    display: block;
-    margin-bottom: 5px;
-    font-style: italic;
+  display: block;
+  margin-bottom: 5px;
+  font-style: italic;
 }
 
 .view-details-link {
-    display: inline-block;
-    padding: 8px 16px;
-    margin-top: 10px;
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
+  display: inline-block;
+  padding: 8px 16px;
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid #2980b9;
 }
 
 .view-details-link:hover {
-    background-color: #2980b9;
+  background-color: #2980b9;
 }
 
 .bill-nav {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 /* Adjust the button popup and modal styles if necessary */
@@ -1609,70 +1979,96 @@ li:hover {
 /* CSS for the Petition Tracker Styled Similar to Library Theme limited to petition-ul */
 
 .petition-ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  background-color: #f6f6f8;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.petition-ul .update {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  gap: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .petition-ul .petition-item {
-    background-color: #f5f5f5;
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .petition-ul .petition-item .petition-details {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.petition-subject {
+  padding-bottom: 10px;
+}
+
+.petition-presenter {
+  font-weight: bold;
+}
+
+.petition-petitioner {
+  font-weight: bold;
+  color: #3498db;
 }
 
 .petition-ul .petition-item .petition-details span {
-    display: block;
-    margin-bottom: 5px;
-    font-style: italic;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .petition-ul .petition-item .petition-nav {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .petition-ul .petition-item .form-popup {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
 }
 
 .petition-ul .petition-item form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .petition-ul .petition-item label {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .petition-ul .petition-item textarea {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .petition-ul .petition-item button {
-    padding: 8px 16px;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .petition-ul .petition-item button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
+  background-color: #aaa;
+  cursor: not-allowed;
 }
-
-
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
@@ -1689,7 +2085,6 @@ li:hover {
   list-style: none;
   padding: 0;
   margin: 0;
-
 }
 
 .trackers-list li {
@@ -1704,7 +2099,6 @@ li:hover {
 
 .trackers-list li p {
   margin: 5px 0;
-
 }
 
 .trackers-list li p span {
@@ -1718,7 +2112,6 @@ li:hover {
 .trackers-list li .update {
   margin-top: 10px;
 }
-
 
 .bill-activity {
   width: 400px;
@@ -1762,4 +2155,80 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #3367d6;
+}
+
+/* Buttton classes */
+
+.update-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #6fc161;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* accordion  */
+
+.accordion {
+  margin-top: 20px;
+}
+.accordion-item {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+.accordion-title {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 18px;
+
+}
+.accordion-content {
+  margin-top: 10px;
+  padding-left: 20px;
+  text-align: left;
+  
+}
+
+/* Hieraachy CSS  */
+
+.hierarchy {
+  margin-top: 20px;
+}
+
+.hierarchy ul {
+  margin-bottom: 10px;
+}
+
+.hierarchy li {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.hierarchy li:last-child {
+  margin-bottom: 0;
+}
+
+.hierarchy p{
+  margin-bottom: 5px;
+  text-align: left;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hierarchy-title {
+  font-weight: bold;
+}
+
+.hierarchy-description {
+  margin-top: 5px;
 }

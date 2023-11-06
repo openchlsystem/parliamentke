@@ -66,6 +66,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080', 
     'https://app.iqsacco.com',
+    'http://192.168.190.103:8080',
     # Replace with the actual allowed origin(s)
     # Add more allowed origins as needed
 ]

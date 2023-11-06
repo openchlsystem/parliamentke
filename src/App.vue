@@ -2,7 +2,6 @@
 
 <template>
   <div class="layout">
-    <!-- <header class="header">Header 1</header> -->
     <header class="header">
       <NavBar />
     </header>

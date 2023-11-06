@@ -1,4 +1,4 @@
-export const StandingOrders = [
+const data = [
   {
     text_id: 1,
     date: "2023-10-23T20:12:00Z",
@@ -90,7 +90,7 @@ export const StandingOrders = [
   },
   {
     text_id: 12,
-   
+
     date: "2023-10-23T07:20:13.111650Z",
     content: "STATEMENTS",
     document: "Standing Orders",
@@ -100,7 +100,7 @@ export const StandingOrders = [
   {
     text_id: 13,
     date: "2023-10-23T07:20:13.111650Z",
-   
+
     document: "Standing Orders",
     content: "partX1—APPROVAL OF PUBLIC APPOINTMENTS",
     heirarchy: "Part",
@@ -109,7 +109,7 @@ export const StandingOrders = [
   {
     text_id: 14,
     date: "2023-10-23T07:20:13.111650Z",
-   
+
     document: "Standing Orders",
     content: "APPROVAL OF PUBLIC APPOINTMENTS",
     heirarchy: "Part",
@@ -126,9 +126,9 @@ export const StandingOrders = [
   {
     text_id: 16,
     date: "2023-10-23T07:20:13.111650Z",
-   
+
     document: "Standing Orders",
-     content: "PROCEDURE FOR REMOVAL FROM STATE OFFICE",
+    content: "PROCEDURE FOR REMOVAL FROM STATE OFFICE",
     heirarchy: "Part",
     parent: 15,
   },
@@ -331,9 +331,8 @@ export const StandingOrders = [
     date: "2023-10-23T07:20:13.111650Z",
     document: "Standing Orders",
     heirarchy: "Header",
-    content : "In cases not provided for, the Speaker to decide",
-     parent: 1,
-
+    content: "In cases not provided for, the Speaker to decide",
+    parent: 1,
   },
   {
     text_id: 42,
@@ -356,10 +355,10 @@ export const StandingOrders = [
     text_id: 44,
     date: "2023-10-23T07:20:13.111650Z",
     document: "Standing Orders",
-  
+
     heirarchy: "Header",
     content: "Proceedings on assembly of a new House",
-      parent: 2,
+    parent: 2,
   },
   {
     text_id: 45,
@@ -375,7 +374,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Nomination of candidates",
-     parent: 2,
+    parent: 2,
   },
   {
     text_id: 47,
@@ -439,8 +438,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Resignation",
-      parent: 3,
- 
+    parent: 3,
   },
   {
     text_id: 55,
@@ -456,7 +454,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Election of Deputy Speaker",
-       parent: 4,
+    parent: 4,
   },
   {
     text_id: 57,
@@ -464,7 +462,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Notification of opening of Parliament",
-      parent: 4,
+    parent: 4,
   },
   {
     text_id: 58,
@@ -472,7 +470,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Chairperson of Committees of the whole House",
-      parent: 4,
+    parent: 4,
   },
   {
     text_id: 59,
@@ -503,15 +501,17 @@ export const StandingOrders = [
     date: "2023-10-23T07:20:13.111650Z",
     document: "Standing Orders",
     heirarchy: "Header",
-    content: "Leader of the Majority Party and Deputy Leader of the Majority Party",
-       parent: 5,
+    content:
+      "Leader of the Majority Party and Deputy Leader of the Majority Party",
+    parent: 5,
   },
   {
     text_id: 63,
     date: "2023-10-23T07:20:13.111650Z",
     document: "Standing Orders",
     heirarchy: "Header",
-    content: "Leader of the Minority Party and Deputy Leader of the Minority Party",
+    content:
+      "Leader of the Minority Party and Deputy Leader of the Minority Party",
     parent: 5,
   },
   {
@@ -520,7 +520,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Presidents address on opening of new Parliament",
-     parent: 6,
+    parent: 6,
   },
   {
     text_id: 65,
@@ -536,7 +536,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "President entering or leaving the Chamber",
-     parent: 6,
+    parent: 6,
   },
   {
     text_id: 67,
@@ -544,7 +544,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Presidents address to Parliament",
-     parent: 6,
+    parent: 6,
   },
   {
     text_id: 68,
@@ -559,7 +559,8 @@ export const StandingOrders = [
     date: "2023-10-23T07:20:13.111650Z",
     document: "Standing Orders",
     heirarchy: "Header",
-    content: "Designation of a place in the Chamber for Cabinet Secretaries and other persons",
+    content:
+      "Designation of a place in the Chamber for Cabinet Secretaries and other persons",
     parent: 6,
   },
   {
@@ -568,7 +569,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Location of the first sitting of a new House",
-      parent: 7,
+    parent: 7,
   },
   {
     text_id: 71,
@@ -576,7 +577,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Regular Sessions of the House",
-      parent: 7,
+    parent: 7,
   },
   {
     text_id: 72,
@@ -704,10 +705,10 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "General rules on Questions",
-   parent: 11,
-   },
+    parent: 11,
+  },
   // Continue with the rest of your data...
-{
+  {
     text_id: 88,
     date: "2023-10-23T07:20:13.111650Z",
     document: "Standing Orders",
@@ -721,7 +722,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Report on Questions",
-   parent: 11,
+    parent: 11,
   },
   {
     text_id: 90,
@@ -793,7 +794,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Motions which may be moved without Notice",
-      parent: 14,
+    parent: 14,
   },
   {
     text_id: 99,
@@ -808,7 +809,8 @@ export const StandingOrders = [
     date: "2023-10-23T07:20:13.111650Z",
     document: "Standing Orders",
     heirarchy: "Header",
-     parent: 14,
+    content: "Amendments to be made",
+    parent: 14,
   },
   {
     text_id: 101,
@@ -865,7 +867,7 @@ export const StandingOrders = [
     heirarchy: "Header",
     content: "Procedure for removal of President on grounds of incapacity",
     parent: 16,
-     },
+  },
   {
     text_id: 108,
     date: "2023-10-23T07:20:13.111650Z",
@@ -928,7 +930,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Roll call Division claimed",
-   parent: 17,
+    parent: 17,
   },
   {
     text_id: 116,
@@ -969,7 +971,7 @@ export const StandingOrders = [
     heirarchy: "Header",
     content:
       ". Proceedings to be in Kiswahili, English or Kenyan Sign Language",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 121,
@@ -977,7 +979,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Members to address the Speaker",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 122,
@@ -985,7 +987,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Two or more Members requesting to speak",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 123,
@@ -993,7 +995,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Speeches may not be read",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 124,
@@ -1001,7 +1003,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "No Member to speak after Question put",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 125,
@@ -1009,7 +1011,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Speaking twice to a Question",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 126,
@@ -1017,7 +1019,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Member who has spoken to question may speak to amendment",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 127,
@@ -1025,7 +1027,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Debate on amendment confined to amendment",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 128,
@@ -1033,7 +1035,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Reserving rights of speech",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 129,
@@ -1041,7 +1043,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Points of Order",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 130,
@@ -1049,7 +1051,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Personal Statements",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 131,
@@ -1057,7 +1059,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Anticipating debate",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 132,
@@ -1065,7 +1067,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Proceedings of Select Committees not to be referred to",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 133,
@@ -1073,7 +1075,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "content of speeches",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 134,
@@ -1081,7 +1083,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Retraction and Apologies",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 135,
@@ -1089,7 +1091,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Matters sub judice or secret",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 136,
@@ -1097,7 +1099,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Declaration of interest",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 137,
@@ -1105,7 +1107,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Responsibility for statement of fact",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 138,
@@ -1113,7 +1115,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Closure of debate",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 139,
@@ -1121,7 +1123,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Resumption of interrupted business",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 140,
@@ -1129,7 +1131,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Header",
     content: "Adjournment of debate",
-     parent: 18,
+    parent: 18,
   },
   {
     text_id: 141,
@@ -1498,7 +1500,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Upon the Prestext_ident notifying the place and date for the first sitting of a new Assembly pursuant to Article 126(2) of the Constitution, the Clerk shall by notice in the Gazette notify that fact and invite interested persons to submit their",
-   parent: 46,
+    parent: 46,
   },
   {
     text_id: 182,
@@ -1508,7 +1510,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "The names of candtext_idates for election to the office of Speaker shall be entered upon nomination papers obtained from the Clerk and handed back to the Clerk, at least forty-eight hours before the time appointed at which the House is to meet to elect a Speaker.",
-       parent: 46,
+    parent: 46,
   },
   {
     text_id: 183,
@@ -1518,7 +1520,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "The nomination papers of a candtext_idate shall be accompanied by the names and signatures of twenty Members who support the candtext_idate and a declaration by them that the candtext_idate is qualified to be elected as a Member of Parliament under Article 99 of the Constitution and is willing to serve as Speaker of the National Assembly",
-   parent: 46,
+    parent: 46,
   },
   {
     text_id: 184,
@@ -1527,7 +1529,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "The Clerk shall maintain a register in which shall be shown the date and time when each candtext_idates nomination papers were received and shall ascertain that every such candtext_idate for election to the office of Speaker is qualified to be elected as such under Article 106 of the Constitution",
-       parent: 46,
+    parent: 46,
   },
   {
     text_id: 185,
@@ -1536,7 +1538,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Immediately upon the close of the nomination period provtext_ided for in Paragraph (2), the Clerk shall\n(a) publicize and make available to all Members, a list showing all qualified candtext_idates; and\n(b) make available to all Members, copies of the curriculum vitae of the qualified candtext_idates.",
-       parent: 46,
+    parent: 46,
   },
   {
     text_id: 186,
@@ -1545,7 +1547,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "The Clerk shall, at least two hours before the meeting of the Assembly, prepare ballot papers upon which shall be shown the names of all candtext_idates valtext_idly nominated under Paragraph (5) of this Standing Orders",
-       parent: 46,
+    parent: 46,
   },
   {
     text_id: 187,
@@ -1553,7 +1555,7 @@ export const StandingOrders = [
     document: "Standing Orders",
     heirarchy: "Paragraph",
     content: "The election of the Speaker shall be by secret ballot.",
-     parent: 47,
+    parent: 47,
   },
   {
     text_id: 188,
@@ -1562,7 +1564,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "The Clerk shall, at the commencement of each ballot, cause the ballot box, empty and unlocked, to be displayed to the House and shall, in the presence of the House, lock the box, which shall thereafter be kept in the full view of the House until the conclusion of the ballot",
-     parent: 47,
+    parent: 47,
   },
   {
     text_id: 189,
@@ -1571,7 +1573,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "The Clerk shall issue not more than one ballot paper to each Member who comes to the Table to obtain it and each Member who wishes to vote shall proceed to a booth or designated area provtext_ided by the Clerk for that purpose and located next to and within reasonable distance of the ballot box and shall, while there, mark the ballot paper by placing a mark in the space opposite the name of the candtext_idate for whom the Member wishes to vote, fold the marked ballot paper before leaving the booth or area and place the folded ballot paper in the ballot box.",
-     parent: 47,
+    parent: 47,
   },
   {
     text_id: 190,
@@ -1591,7 +1593,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "The Clerk shall make such arrangements as may be necessary to enable any Member with disability to vote.",
-     parent: 47,
+    parent: 47,
   },
   {
     text_id: 192,
@@ -1610,7 +1612,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "A ballot paper is spoilt, if in the Clerk’s opinion, it does not text_identify the candtext_idate purported to be selected by the Member voting",
-     parent: 47,
+    parent: 47,
   },
   {
     text_id: 194,
@@ -1629,7 +1631,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "If no candidate is supported by the votes of two-thirds of all Members, the candtext_idate or candtext_idates who received the highest number of votes in the ballot referred to in Paragraph (1) and the candtext_idate or candtext_idates who in that ballot received the next highest number of votes shall alone stand for election in a further ballot and the candtext_idate who receives the highest number of votes in the further ballot shall be elected Speaker",
-      parent: 48,
+    parent: 48,
   },
   {
     text_id: 196,
@@ -1638,7 +1640,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "A candidate may, by written notice to the Clerk, withdraw his or her name before a ballot is started, and in the event of such withdrawal, the Clerk shall cross-out the name of that candtext_idate off any ballot papers issued for that or any subsequent ballot.",
-      parent: 49,
+    parent: 49,
   },
   {
     text_id: 197,
@@ -1648,7 +1650,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "If, in the further ballot referred to in Standing Orders 7 (Election threshold), more than one candteidate receives the highest number of votes, the ballot shall again be taken, and if there is an equality of the highest number of votes, a further ballot shall be taken until one candtext_idate obtains more votes than the other or others.",
-      parent: 50,
+    parent: 50,
   },
   {
     text_id: 198,
@@ -1657,7 +1659,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Immediately the results are declared, all the ballot papers used in the election of a Speaker shall be packed and sealed in the presence of the House and kept in the custody of the Clerk for a period of six months and shall thereafter be destroyed.",
-      parent: 51,
+    parent: 51,
   },
   {
     text_id: 199,
@@ -1666,7 +1668,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Despite the provisions of this Part, if there is only one candtext_idate who has been duly nominated for election as Speaker at the expiry of the nomination period, that candtext_idate shall be declared forthwith to have been elected Speaker without any ballot or vote being required",
-     parent: 52,
+    parent: 52,
   },
   {
     text_id: 200,
@@ -1676,7 +1678,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Immediately following the election of the Speaker, the Clerk shall administer the Oath or Affirmation of Office to the Speaker in the presence of the assembled House.",
-     parent: 53,
+    parent: 53,
   },
   {
     text_id: 201,
@@ -2103,7 +2105,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "A Member may give a notice of Motion that “The Thanks of the House be recorded for the exposition of public policy contained in the Address of the Prestext_ident delivered on….;” but debate on the Motion shall not exceed four sitting days.",
-      parent: 67,
+    parent: 67,
   },
   {
     text_id: 328,
@@ -2769,7 +2771,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Where a Member prefers a written reply to his or her Question—\n(a) the Speaker shall direct that a written reply be provtext_ided in respect of the Question; and\n(b) the Clerk shall forward the Question to the relevant Cabinet Secretary and, upon receipt, provtext_ide the written reply to the Member.",
-    parent:87,
+    parent: 87,
   },
   {
     text_id: 402,
@@ -2778,7 +2780,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Subject to Paragraph (2), a Cabinet Secretary shall reply to a Question within thirty days of referral of a Question to a Committee.",
-    parent:88,
+    parent: 88,
   },
   {
     text_id: 403,
@@ -2841,7 +2843,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "During the Statements Hour—\n(a) a Member of the House Business Committee designated by the Committee for that purpose shall, every Thursday or on the last sitting day, for not more than ten minutes, present and lay on the Table, a statement informing the House of the business coming before the House in the following week;\n(b) the Leader of the Majority Party, or the Leader of the Minority Party as the case may be, or their designees may make a statement relating to their responsibilities in the House or the activities of a Committee;\n(c) A Member may request for a statement from the Committee chairperson relating to matters under the mandate of the Committee and the Speaker may either appoint a day for the statement or direct that the statement be issued on the same day.",
-    parent: 90
+    parent: 90,
   },
   {
     text_id: 410,
@@ -2903,7 +2905,7 @@ export const StandingOrders = [
     heirarchy: "Paragraph",
     content:
       "Before giving notice of Motion, the Member shall deliver to the Clerk a copy of the proposed Motion in writing and signed by the Member, and the Clerk shall submit the proposed Motion to the Speaker.",
-    parent:93,
+    parent: 93,
   },
   {
     text_id: 417,
@@ -2943,6 +2945,45 @@ export const StandingOrders = [
   },
 ];
 
+// neww
 
+// Reassigning text_id values based on hierarchy relationships
+function reassignTextIDs(data) {
+  const hierarchyMap = {};
+
+  // Group data by hierarchy type
+  data.forEach((obj) => {
+    if (!hierarchyMap[obj.heirarchy]) {
+      hierarchyMap[obj.heirarchy] = [];
+    }
+    hierarchyMap[obj.heirarchy].push(obj);
+  });
+
+  // Rearrange text_id based on the hierarchy relationships
+  let newTextId = 1;
+  const processHierarchy = (hierarchyType) => {
+    if (hierarchyMap[hierarchyType]) {
+      hierarchyMap[hierarchyType].forEach((obj) => {
+        obj.text_id = newTextId++;
+      });
+    }
+  };
+
+  // Reassign the text_id based on the specified hierarchy relationships
+  processHierarchy("Document");
+  processHierarchy("Header");
+  processHierarchy("Paragraph");
+  processHierarchy("Part");
+
+  return data;
+}
+
+// Call the function to reassign the text_id values
+const StandingOrders = reassignTextIDs(data);
+
+// Display the updated data with modified text_id values
+console.log(StandingOrders);
+
+export default StandingOrders;
 
 // arrnge the object cronologically for that all child objects should never appear before the pareant .

@@ -1,79 +1,107 @@
 <template>
   <h2>Kenya Parliament Dashboard</h2>
-  <div class="dashboard">
-    <div class="metric-cards">
-      <div class="metric-card">
-        <h3>Bill</h3>
-        <p>{{ billCount }}</p>
+
+  <div class="metric-area">
+    <div class="side-panel">
+      <h3>Nav</h3>
+    </div>
+    <div class="metric-top">
+      <div class="metric-cards">
+        <div class="metric-card">
+          <p>{{ billCount }}</p>
+          <h3>Bills</h3>
+        </div>
+        <div class="metric-card">
+          <p>{{ newBills }}</p>
+          <h3>New Bills</h3>
+        </div>
+        <div class="metric-card">
+          <p>{{ billPassed }}</p>
+          <h3>Bills Passed</h3>
+        </div>
+        <div class="metric-card">
+          <p>{{ billsRational }}</p>
+          <h3>%</h3>
+        </div>
       </div>
-      <div class="metric-card">
-        <h3>Bill Passed</h3>
-        <p>{{ billPassed }}</p>
-      </div>
-      <div class="metric-card">
-        <h3>%</h3>
-        <p>{{ billsRational }}</p>
-      </div>
-      <div class="metric-card">
-        <h3>Motions</h3>
-        <p>{{ motionCount }}</p>
-      </div>
-      <div class="metric-card">
-        <h3>Adopted</h3>
-        <p>{{ motionsAdopted }}</p>
-      </div>
-      <div class="metric-card">
-        <h3>%</h3>
-        <p>{{ percentagemotionsAdopted }}</p>
-      </div>
-      <div class="metric-card">
-        <h3>Petions</h3>
-        <p>{{ petitionCount }}</p>
-      </div>
-      <div class="metric-card">
-        <h3>Petitions Concluded</h3>
-        <p>{{ petitionsConcluded }}</p>
-      </div>
-      <div class="metric-card">
-        <h3>%t</h3>
-        <p>{{ petitionConcluedPercentage }}</p>
+
+      <div class="charts">
+        
+
+        <div class="dashboard-item">
+          <GChart
+            type="PieChart"
+            :data="chartDataComputed"
+            :options="chartOptions"
+          />
+          <h3>Bill By Sponser</h3>
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="ColumnChart"
+            :data="chartDataComputed3"
+            :options="chartOptions3"
+          />
+
+          <h3>Bill By Month</h3>
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="BarChart"
+            :data="chartDataComputed2"
+            :options="chartOptions"
+          />
+          <h3>Bill By Stage</h3>
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="LineChart"
+            :data="chartDataComputed3"
+            :options="chartOptions3"
+          />
+          <h3>Bill by Month</h3>
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="AreaChart"
+            :data="chartDataComputed"
+            :options="chartOptions"
+          />
+          <h3>Bill by Year Comparison</h3>
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="ComboChart"
+            :data="chartDataComputed"
+            :options="chartOptions"
+          />
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="ScatterChart"
+            :data="chartDataComputed"
+            :options="chartOptions"
+          />
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="BubbleChart"
+            :data="chartDataComputed"
+            :options="chartOptions"
+          />
+        </div>
+        <div class="dashboard-item">
+          <GChart
+            type="Histogram"
+            :data="chartDataComputed2"
+            :options="chartOptions2"
+          />
+        </div>
       </div>
     </div>
-    <div class="charts">
-      <div class="dashboard-item">
-        <GChart type="ColumnChart" :data="chartDataComputed" :options="chartOptions" />
-
-        <h3>Bill By Stage</h3>
-      </div>
-
-      <div class="dashboard-item">
-        <GChart type="PieChart" :data="chartDataComputed" :options="chartOptions" />
-        <h3>Bill By Sponser</h3>
-      </div>
-      <div class="dashboard-item">
-        <GChart type="BarChart" :data="chartDataComputed" :options="chartOptions" />
-        <h3>Bill By Committees</h3>
-      </div>
-      <div class="dashboard-item">
-        <GChart type="LineChart" :data="chartDataComputed" :options="chartOptions" />
-        <h3>Bill by Month</h3>
-      </div>
-      <div class="dashboard-item">
-        <GChart type="AreaChart" :data="chartDataComputed" :options="chartOptions" />
-        <h3>Bill by Year Comparison</h3>
-      </div>
-      <div class="dashboard-item">
-        <GChart type="ComboChart" :data="chartDataComputed" :options="chartOptions" />
-      </div>
-      <div class="dashboard-item">
-        <GChart type="ScatterChart" :data="chartDataComputed" :options="chartOptions" />
-      </div>
-      <div class="dashboard-item">
-        <GChart type="BubbleChart" :data="chartDataComputed" :options="chartOptions" />
-      </div>
-      <div class="dashboard-item">
-        <GChart type="Histogram" :data="chartDataComputed" :options="chartOptions" />
-      </div>
+    <div class="calender-area">
+      <h3>Calender</h3>
+      <CalenderPage />
     </div>
   </div>
 </template>
@@ -83,9 +111,10 @@ import { GChart } from "vue-google-charts";
 // import { ref, onMounted, computed } from "vue";
 import { reactive, onMounted, computed, ref } from "vue";
 import axios from "@/utils/axios";
+import CalenderPage from "@/views/CalenderPage.vue";
 
 export default {
-  components: { GChart },
+  components: { GChart, CalenderPage },
   // data() {
   // return {
   //   chartData: [
@@ -106,6 +135,7 @@ export default {
 
   setup() {
     const billCount = ref(0);
+    const newBills = ref(0);
     const motionCount = ref(0);
     const petitionCount = ref(0);
     const petitionsConcluded = ref(0);
@@ -114,13 +144,94 @@ export default {
     const state = reactive({
       fileactivities: [],
       chartData: [],
+      chartData2: [],
+      chartData3: [],
       chartOptions: {
         chart: {
-          title: "Company Performance by Stage",
+          title: "Bill by Stage",
           subtitle: "Count of each stage",
         },
       },
+
+      chartOptions2: {
+        chart: {
+          title: "Bill by Sponser",
+          subtitle: "Count of each sponser",
+        }
+      },
+      chartOptions3: {
+        chart: {
+          title: "Bill by Sponsor",
+          subtitle: "Count of each sponsor",
+        }
+      }
     });
+
+
+    const getBillCountByMonth = async () => {
+      try {
+        const response = await axios.get(`/billtrackers/`);
+        
+
+        const chartDataObj = response.data.reduce((acc, curr) => {
+          const month = new Date(curr.date).getMonth() + 1;
+          const year = new Date(curr.date).getFullYear();
+          
+          const key = `${month}/${year}`;
+          
+          if (!acc[key]) {
+            acc[key] = 1;
+          } else {
+            acc[key]++;
+          }
+          return acc;
+        }, {});
+        
+        state.chartData3 = Object.entries(chartDataObj).reduce(
+          (acc, [key, value]) => {
+            acc.push([key, value]);
+            return acc;
+          },
+          [["month", "Count"]]
+        ).sort((a, b) => {
+          const [monthA, yearA] = a[0].split('/');
+          const [monthB, yearB] = b[0].split('/');
+          return new Date(yearA, monthA - 1) - new Date(yearB, monthB - 1);
+        });
+        
+        console.log("billCount", billCount.value);
+      } catch (error) {
+        console.error("Error fetching documents:", error);
+      }
+    };
+
+
+    const getBillsBysponsor = async () => {
+      try {
+        const response = await axios.get(`/billtrackers/`);
+
+        const chartDataObj = response.data.reduce((acc, curr) => {
+          if (!acc[curr.sponsor]) {
+            acc[curr.sponsor] = 1;
+          } else {
+            acc[curr.sponsor]++;
+          }
+          return acc;
+        }, {});
+
+        state.chartData2 = Object.entries(chartDataObj).reduce(
+          (acc, [key, value]) => {
+            acc.push([key, value]);
+            return acc;
+          },
+          [["sponsor", "Count"]]
+        );
+
+        console.log("sponsorCount", state.chartData2);
+      } catch (error) {
+        console.error("Error fetching documents:", error);
+      }
+    };
 
     const getActivities = async () => {
       try {
@@ -159,13 +270,37 @@ export default {
       }
     };
 
+
+
+
+
     const chartDataComputed = computed(() => state.chartData);
+
+    const chartDataComputed2 = computed(() => state.chartData2);
+
+    const chartDataComputed3 = computed(() => state.chartData3);
+
+    console.log("chartDataComputed2", chartDataComputed2);
 
     const getBillCount = async () => {
       try {
         const response = await axios.get(`/billtrackers/`);
         billCount.value = response.data.length;
         console.log("billCount", billCount.value);
+      } catch (error) {
+        console.error("Error fetching documents:", error);
+      }
+    };
+
+    const getNewBills = async () => {
+      try {
+        const response = await axios.get(`/billtrackers/`, {
+          params: {
+            status: "new",
+          },
+        });
+        newBills.value = response.data.length;
+        console.log("newBills", newBills.value);
       } catch (error) {
         console.error("Error fetching documents:", error);
       }
@@ -215,7 +350,6 @@ export default {
       }
     };
 
-
     const percentagemotionsAdopted = computed(() => {
       return (
         Math.round((motionsAdopted.value / motionCount.value) * 100 * 100) / 100
@@ -237,18 +371,20 @@ export default {
         const response = await axios.get(`/petitiontrackers/`, {
           params: {
             status: "concluded",
-          }
+          },
         });
         petitionsConcluded.value = response.data.length;
         console.log("petitionsConcluded", petitionsConcluded.value);
       } catch (error) {
         console.error("Error fetching documents:", error);
       }
-    }
+    };
 
     const petitionConcluedPercentage = computed(() => {
       return (
-        Math.round((petitionsConcluded.value / petitionCount.value) * 100 * 100) / 100
+        Math.round(
+          (petitionsConcluded.value / petitionCount.value) * 100 * 100
+        ) / 100
       ).toFixed(2);
     });
 
@@ -260,6 +396,9 @@ export default {
       getMotionsAdopted();
       getPetitionCount();
       getPetionConcluded();
+      getNewBills();
+      getBillsBysponsor();
+      getBillCountByMonth();
     });
     return {
       ...state,
@@ -280,8 +419,14 @@ export default {
       getPetitionCount,
       getPetionConcluded,
       petitionConcluedPercentage,
-     
-
+      newBills,
+      getNewBills,
+      chartDataComputed2,
+      getBillsBysponsor,
+      getBillCountByMonth,
+      chartDataComputed3,
+      
+      
     };
   },
 };

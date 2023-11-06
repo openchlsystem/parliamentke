@@ -47,7 +47,12 @@ import { kenyanParliamentDocumentTypes } from '@/utils/KenyanParliamentaryDocume
 import { legislativeStages } from '@/utils/LegislationStages.js'
 import axios from '@/utils/axios.js'
 export default {
-    setup() {
+    props: {
+        billId: String,
+        
+    },
+    
+    setup(props) {
 
 
         const selectedStage = ref('');
@@ -63,6 +68,7 @@ export default {
             name: '',
             size: '',
             fibinary: '',
+            refdocument: ref(props.billId),
 
 
 
@@ -113,6 +119,7 @@ export default {
             formData.append('document', selectedDocument.value.document_name)
             formData.append('function', selectedDocument.value.functional_area)
             formData.append('status', "draft")
+            formData.append('refdocument', ref(props.billId))
 
             console.log(formData)
 

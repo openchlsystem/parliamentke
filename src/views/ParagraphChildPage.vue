@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1>Part Child {{ mytextid }}</h1>
+    <!-- <h1>Part Child {{ mytextid }}</h1> -->
     <!-- <p>{{ partList }}</p> -->
     <!-- {{ documentlist }} -->
-    <div class="heierarchy">
+    <div class="hierarchy">
       <ul>
         <li v-for="item in partList" :key="item.text_id">
-          {{ item.content }}
+          <p>
+            {{ item.content }}
+          </p>
         </li>
       </ul>
     </div>
@@ -29,16 +31,16 @@ export default {
     },
   },
 
- 
-
   setup(props) {
     // const partList = ref([]);
     // const store = useStore;
 
-    const partList = computed(() =>
-      props.documentlist?.filter(
-        (item) => item.heirarchy === "Paragraph" && item.parent === props.text_id
-      ) ?? []
+    const partList = computed(
+      () =>
+        props.documentlist?.filter(
+          (item) =>
+            item.heirarchy === "Paragraph" && item.parent === props.text_id
+        ) ?? []
     );
 
     const toggleItem = (item) => {
@@ -47,8 +49,8 @@ export default {
 
     return {
       mytextid: computed(() => props.text_id),
-        partList,
-      toggleItem
+      partList,
+      toggleItem,
     };
   },
 };

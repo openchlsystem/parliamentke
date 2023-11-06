@@ -1,21 +1,25 @@
 <template>
   <div>
-    <h1>Part Child {{ mytextid }}</h1>
+    <!-- <h1>Part Child {{ mytextid }}</h1> -->
     <!-- <p>{{ partList }}</p> -->
     <!-- {{ documentlist }} -->
-    <div class="heirarchy">
+    <div class="hierarchy">
       <ul>
         <li
           v-for="item in partList"
           :key="item.text_id"
+          
           @click="toggleItem(item)"
         >
-          {{ item.content }}
+          <h3>{{ item.content }}</h3>
+
           <div v-if="item.open">
-            <ParagraphChild
-              :text_id="item.text_id"
-              :documentlist="documentlist"
-            />
+            <p>
+              <ParagraphChild
+                :text_id="item.text_id"
+                :documentlist="documentlist"
+              />
+            </p>
           </div>
           <div v-else>
             <span class="minus-icon">-</span>
