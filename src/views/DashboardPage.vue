@@ -1,12 +1,23 @@
 <template>
   <div class="main-dashboard">
-    <h1>Dashboard</h1>
-    <select name="selectarea" id="select" v-model="selectedArea">
-      <option value="" default>Select Dashboard</option>
-      <option value="bills">Bills</option>
-      <option value="petitions">Petitions</option>
-      <option value="motions">Motions</option>
-    </select>
+    <h2>Dashboard</h2>
+    <div class="button-headers">
+      
+
+      <div class="dropdown">
+        <button class="dropbtn">Select a Dashboard</button>
+        <div class="dropdown-content">
+          <a href="#" @click="selectedArea = 'bills'">Bills</a>
+          <a href="#" @click="selectedArea = 'petitions'">Petitions</a>
+          <a href="#" @click="selectedArea = 'motions'">Motions</a>
+          <a href="#" @click="selectedArea = 'documents'">Documents</a>
+          <a href="#" @click="selectedArea = 'committees'">Committers</a>
+          <a href="#" @click="selectedArea = 'members'">Members</a>
+       
+
+        </div>
+      </div>
+    </div>
 
     <div class="dashboard" v-if="selectedArea === 'bills'">
       <billsDashboard />

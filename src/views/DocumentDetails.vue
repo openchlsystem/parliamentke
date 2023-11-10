@@ -1,10 +1,10 @@
 <template>
-    <div class="top-bar">
-        <button @click="$router.go(-1)"><i class="bi bi-arrow-left"></i></button>
+    <div class="header-buttons">
+        <button @click="$router.go(-1)"><i class="bi bi-arrow-left"></i>Back</button>
     </div>
     <div style="height: 200vh; width: 100%; ">
 
-        <h1>Document Details {{ pdfUrl }}</h1>
+        <a>Document Details {{ pdfUrl }}</a>
         <div class="document-details">
             <div class="document" v-if="pdfUrl">
                 <PDFviewer :pdfUrl="fileListing.file" />

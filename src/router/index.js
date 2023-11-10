@@ -28,6 +28,12 @@ const routes = [
     props: true,
   },
   {
+    path: "/bills/:id/",
+    name: "bills", 
+    component: () => import("../views/BillsDetails.vue"),
+    props: true,
+  },
+  {
     path: "/trackers",
     name: "trackers",
     component: () => import("../views/TrackersPage.vue"),
@@ -62,6 +68,12 @@ const routes = [
     name: "committees",
     component: () => import("../views/CommitteesPage.vue"),
   },
+  {
+    path: "/events",
+    name: "events",
+    component: () => import("../views/CalenderPage.vue"),
+  },
+
 
 
 ];

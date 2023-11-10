@@ -129,7 +129,7 @@ class BillTrackerActivityListCreateView(generics.ListCreateAPIView):
     queryset = BillTrackerActivity.objects.all()
     serializer_class = BillTrackerActivitySerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'description']
+    filterset_fields = ['id', 'BillTracker']
     
 class BillTrackerActivityDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = BillTrackerActivity.objects.all()

@@ -64,7 +64,7 @@ class File(models.Model):
     date = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField( editable=False,default=timezone.now)
     updated_at = models.DateTimeField( editable=False,default=timezone.now)
-    refdocument = models.CharField(max_length=255)
+    refdocument = models.CharField(max_length=255,null=True, blank=True)
 
     def __str__(self):
         return str(self.name)

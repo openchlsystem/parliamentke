@@ -1,22 +1,23 @@
 <template>
+  {{ searchArea }}
   <div class="search">
     <img src="../assets/logo.png" alt="" />
     <input
       type="text"
       v-model="searchTerm"
       @input="handleSearch"
-      placeholder="Search..."
+      :placeholder="'search' + '  ' + searchArea"
       class="search-home"
     />
     <button class="microphone" @click="handleVoiceSearch">
       <i class="bi bi-mic"></i>
     </button>
     <div class="search-buttons">
-      <button>Documents</button>
-      <button>Bill</button>
-      <button>Petion</button>
-      <button>Motion</button>
-      <button>Events</button>
+      <button @click="searchArea = 'documents'">Documents</button>
+      <button @click="searchArea = 'bills'">Bill</button>
+      <button @click="searchArea = 'petitions'">Petition</button>
+      <button @click="searchArea = 'motions'">Motion</button>
+      <button @click="searchArea = 'events'">Events</button>
       <button @click="this.$router.push('documentsearch')">
         Advanced Search
       </button>
@@ -35,11 +36,11 @@
         >
           <i class="bi bi-file-earmark-pdf"></i>
         </button>
+        <!-- <button @click="gotoRoute(result)"><i class="bi bi-file-earmark-pdf"></i></button> -->
         <div
           class="result-details"
-          @click="
-            this.$router.push({ name: 'documents', params: { id: result.id } })
-          "
+          @click="gotoRoute(result)"
+        
         >
           <h3 class="result-title">{{ result.title }}</h3>
           <p class="result-description">{{ result.description }}</p>
@@ -48,6 +49,9 @@
             <span class="result-type">{{ result.type }}</span>
             <span class="result-date">{{ result.date }}</span>
             <span class="result-name">{{ result.name }}</span>
+            <span class="result-owner">{{ result.subject }}</span>
+            <span class="result-owner">{{ result.petitioner }}</span>
+            <span class="result-status">{{ result.status }}</span>
           </div>
         </div>
       </li>
@@ -56,7 +60,8 @@
 </template>
 
 <script>
-import { ref, reactive, computed, onMounted } from "vue";
+import { ref, reactive, computed, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 import axios from "@/utils/axios";
 
 export default {
@@ -64,9 +69,44 @@ export default {
   setup() {
     const searchTerm = ref("");
     const searchResults = reactive([]);
+    const searchArea = ref(null);
+    const searchArray = ref([]);
+    const router = useRouter();
+
+    const gotoRoute = (result) => {
+      console.log("result", result);
+      console.log("searchArea", searchArea.value);
+      router.push(`/${searchArea.value}/${result.id}`);
+    };
+
     // const staticData = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
     const files = ref([]);
+
+    const endpoints = {
+      documents: "/files/",
+      bills: "/billtrackers/",
+      petitions: "/petitiontrackers/",
+      motions: "/motiontrackers/",
+      events: "/events/",
+    };
+
+    watch(searchArea, async () => {
+      const endpoint = endpoints[searchArea.value];
+      if (endpoint) {
+        try {
+          console.log("endpoint", endpoint);
+          const response = await axios.get(endpoint);
+
+          searchArray.value = response.data;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          searchArray.value = [];
+        }
+      } else {
+        searchArray.value = [];
+      }
+    });
 
     const getFiles = async () => {
       const response = await axios.get("/files/");
@@ -82,7 +122,7 @@ export default {
       // For demonstration purposes, let's just filter a static array
       searchResults.length = 0; // Clear the existing results
       // const filteredResults = files.value.filter((item) => item.toLowerCase().includes(searchTerm.value.toLowerCase()));
-      const filteredResults = files.value.filter((item) => {
+      const filteredResults = searchArray.value.filter((item) => {
         const values = Object.values(item);
         for (const value of values) {
           if (
@@ -113,6 +153,10 @@ export default {
       showResults,
       getFiles,
       files,
+      searchArea,
+      gotoRoute,
+
+      // searchArray,
     };
   },
 };

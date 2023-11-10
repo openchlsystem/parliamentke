@@ -13,6 +13,7 @@
             <h3>{{ committee.name }}</h3>
             <p>{{ committee.description }}</p>
           </div>
+          
           <div class="info-area" v-if="details === committee.id">
             <div class="info">
               <p>Constituency: {{ committee.constituency }}</p>
@@ -24,7 +25,7 @@
             </div>
 
             <div class="committees">
-              <h3>Committees</h3>
+              <h3>Members<span>add</span></h3>
             </div>
 
             <div class="bills">
