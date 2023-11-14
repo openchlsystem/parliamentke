@@ -9,7 +9,7 @@
       <router-link to="/OrderPaper">House Business</router-link>|
       <router-link to="/members">Members</router-link>|
       <router-link to="/events">Events</router-link>|
-      <div class="dropdown">
+      <div class="dropdown dropdown-arrow">
         <!-- Add the dropdown button -->
         <router-link to="/backend">Back Office</router-link>
         <div class="dropdown-content">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <button class="dropdown-toggle" @click="toggleDropdown">
+    <button class="dropdown-toggle " @click="toggleDropdown">
       {{ dropdownLabel }}
     </button>
     <ul

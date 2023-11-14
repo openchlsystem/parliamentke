@@ -33,6 +33,12 @@ const routes = [
     component: () => import("../views/BillsDetails.vue"),
     props: true,
   },
+    {
+    path: "/petitions/:id/",
+    name: "petitions", 
+    component: () => import("../views/PetitionsDetails.vue"),
+    props: true,
+  },
   {
     path: "/trackers",
     name: "trackers",

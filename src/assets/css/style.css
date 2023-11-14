@@ -48,14 +48,11 @@
   --link-color-hover: #0056b3;
   --link-color-active: #0056b3;
 
-  --button-color: #28a745;
-  --button-color-hover: #0056b3;
-  --button-color-active: #0056b3;
-  --button-background-color: lightgray;
+  --button-background-color: rgb(46, 165, 32);
   --button-background-color-hover: #1223df;
   --button-background-color-active: #dee2e6;
   --button-text-color: #fff;
-  --button-text-color-hover: #212529;
+  --button-text-color-hover: #fff;
   --button-text-color-active: #212529;
 
   --input-color: #495057;
@@ -251,7 +248,7 @@ h1 {
 }
 
 h2 {
-  font-size: 3em;
+  font-size: 1.5em;
   font-weight: bold;
   color: rgb(61, 145, 40);
   margin-bottom: 20px;
@@ -350,12 +347,37 @@ button {
   cursor: pointer;
   border: none;
   border-radius: 4px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   font-size: 1rem;
   font-weight: bold;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
   transition: background-color 0.3s ease;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+button:hover {
+  background-color: var(--button-background-color-hover);
+  color: var(--button-text-color-hover);
+  transition: background-color 0.3s ease;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+button:active {
+  background-color: var(--button-background-color-active);
+  color: var(--button-text-color-active);
+  transition: background-color 0.3s ease;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 button:focus {
@@ -495,15 +517,6 @@ form textarea select:focus {
 form select:focus {
   outline: none;
   border-color: var(--primary-color);
-}
-
-form button {
-  background-color: var(--button-bg);
-  color: var(--button-text);
-}
-
-form button:hover {
-  background-color: var(--button-bg-hover);
 }
 
 form .title {
@@ -819,26 +832,14 @@ nav router-link {
 
 /* SEARCH  */
 
-.search-buttons {
+.search-buttons  {
   display: flex;
-  gap: 10px;
 }
 
 .search-buttons button {
-  background-color: #f1f1f1;
-  border: none;
-  padding: 5px;
-}
+  flex: 1;
+  background-color: none;
 
-.search-buttons button:hover {
-  background-color: #e1e1e1;
-  border: 1px solid #279f29;
-}
-
-.search-buttons button:active {
-  background-color: #d1d1d1;
-  border: 1px solid #279f29;
-  color: #279f29;
 }
 
 .search-results {
@@ -899,14 +900,14 @@ nav router-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 999;
+  /* z-index: 999; */
   display: flex;
   flex-direction: column;
   margin-top: 60px;
 }
 
 .search-home {
-  padding: 20px;
+  padding: 30px;
   margin: 20px;
   width: 100%;
   color: #000;
@@ -914,6 +915,22 @@ nav router-link {
   border-radius: 5px;
   margin-top: 60px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.microphone-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px; /* Adjust the font size as needed */
+  color: #555; /* Adjust the color as needed */
+}
+
+.search-home::after{
+  content:"\1F3A4" ;
+  font-size: medium;
+  margin-left: 5px;
 }
 
 .microphone {
@@ -1068,21 +1085,6 @@ li:hover {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
-}
-
-.activities-contentpanel button {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: #f5f5f5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-}
-
-.activities-contentpanel button:hover {
-  background-color: #eaeaea;
 }
 
 .activities-contentpanel nav a {
@@ -1356,58 +1358,11 @@ li:hover {
 
 .header-buttons {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   gap: 10px;
   margin-bottom: 20px;
   margin-top: 60px;
-}
-
-.header-buttons button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  background-color: var(--button-color);
-  color: var(--button-text-color);
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.header-buttons button:hover {
-  background-color: var(--button-color-hover);
-  color: var(--button-text-color-hover);
-}
-
-.tracker-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 20px;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.button:hover {
-  background-color: var(--button-color-hover);
-  color: var(--text-color-hover);
-}
-
-.button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #007bff;
-}
-
-.header-buttons .button:first-child {
-  background-color: var(--button-color);
-  color: var(--button-text-color);
-}
-
-.header-buttons .button:first-child:hover {
-  background-color: var(--button-color-hover);
-  color: var(--button-text-color-hover);
-}
-
-.header-buttons .button:first-child:focus {
-  box-shadow: 0 0 0 2px --buttn-color;
 }
 
 .trackers h2:not(:first-child) {
@@ -1844,19 +1799,6 @@ li:hover {
   margin-right: 10px;
 }
 
-.document-search button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.document-search button:hover {
-  background-color: #0056b3;
-}
-
 .document-search select {
   padding: 10px;
   border: 1px solid #ccc;
@@ -1875,6 +1817,7 @@ li:hover {
   background-color: #f6f6f8;
   border: 1px solid #ccc;
   border-radius: 8px;
+  max-width: 80%;
 }
 
 .motion-ul {
@@ -2039,7 +1982,24 @@ li:hover {
 
 /* Adjust the button popup and modal styles if necessary */
 /* CustomButtonClass */
+.customButtonClass {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  transition: background-color 0.3s ease;
+}
 /* CustomIconClass */
+
+.CustomIconClass {
+  margin-right: 5px;
+  font-size: medium;
+  color: var(--button-text-color);
+  transition: color 0.3s ease;
+}
 
 /* CSS for the Petition Tracker Styled Similar to Library Theme limited to petition-ul */
 
@@ -2048,17 +2008,6 @@ li:hover {
   padding: 0;
   background-color: #f6f6f8;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.petition-ul .update {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 20px;
-  border-radius: 5px;
-  gap: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -2119,20 +2068,6 @@ li:hover {
 
 .petition-ul .petition-item textarea {
   margin-bottom: 10px;
-}
-
-.petition-ul .petition-item button {
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.petition-ul .petition-item button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
 }
 
 /* Media query for smaller screens */
@@ -2204,22 +2139,6 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-}
-
-button[type="submit"] {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #4285f4;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #3367d6;
 }
 
 /* Buttton classes */
@@ -2311,13 +2230,15 @@ button[type="submit"]:hover {
 }
 
 .member-card {
-  background-color: #f5f5f5;
+  background-color: #fff;
+  border: 1px solid ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   padding: 16px;
   margin-bottom: 16px;
   /* width: calc(33.33% - 16px); */
   width: 100%;
+  cursor: pointer;
   /* Adjust the width as per your requirement */
 }
 
@@ -2332,41 +2253,85 @@ button[type="submit"]:hover {
 
 .member-info h3 {
   margin-bottom: 8px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .member-info p {
+  font-size: 14px;
+  color: #555;
   margin-bottom: 4px;
+}
+
+/* committee area  */
+
+.committee-area {
+  font-family: "Roboto", sans-serif; /* Use Google's Roboto font for a more Google-like feel */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+h2 {
+  font-size: 24px;
+  color: #202124; /* Google's primary text color */
+  margin-bottom: 15px;
+}
+
+.member-card {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #dadce0; /* Light gray border */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.member-card:hover {
+  background-color: #f9f9f9; /* Light gray background on hover */
+}
+
+.member-info h3 {
+  color: #1a73e8; /* Google's primary color for links */
+  margin-bottom: 5px;
+}
+
+.member-info p {
+  color: #5f6368; /* Google's secondary text color */
+  margin: 0;
 }
 
 .info-area {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
-  gap: 10px;
-  width: 100%;
+  margin-bottom: 15px;
 }
 
-.button-headers {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
+h4 {
+  color: #202124; /* Google's primary text color */
+  margin-bottom: 10px;
+  text-align: left;
 }
 
-.button-headers button {
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+.commitee-members select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #1a73e8; /* Google's primary color for links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
   cursor: pointer;
-}
-
-.button-headers button:hover {
-  background-color: #2980b9;
 }
 
 /* Detaill Class  */
@@ -2403,7 +2368,6 @@ button[type="submit"]:hover {
   font-weight: bold;
 }
 
-
 /* activities list  */
 
 .activities-list {
@@ -2439,3 +2403,27 @@ button[type="submit"]:hover {
   font-size: 12px;
   color: #888;
 }
+
+.update {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.dropdown-arrow {
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+}
+
+.dropdown-arrow:after {
+  content: "\25BC"; /* Unicode for down-arrow */
+  font-size: 12px;
+  margin-left: 5px; /* Adjust margin as needed */
+}
+
+/* committtee */

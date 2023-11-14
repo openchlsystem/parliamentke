@@ -2,9 +2,7 @@
 
 
   <div class="metric-area">
-    <div class="side-panel">
-      <h3>Nav</h3>
-    </div>
+   
     <div class="metric-top">
       <div class="metric-cards">
         <div class="metric-card">

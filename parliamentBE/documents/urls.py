@@ -37,6 +37,10 @@ urlpatterns = [
 
     path('motiontrackers/', MotionTrackerListCreateView.as_view(), name='motiontracker-list-create'),
     path('motiontrackers/<int:pk>/', MotionTrackerDetailView.as_view(), name='motiontracker-detail'),
+    
+    
+    path('motionactivitytracker/', MotionTrackerActivityListCreateView.as_view(), name='motionactivitytracker-list-create'),
+    path('motionactivitytracker/<int:pk>/', MotionTrackerActivityDetailView.as_view(), name='motionactivitytracker-detail'),
 
     path('DocumentIndex/', DocumentIndexListCreateView.as_view(), name='documentindex'),
     path('DocumentIndex/<int:pk>/', DocumentIndexDetailView.as_view(), name='documentindex-detail'),

@@ -6,12 +6,13 @@
       type="text"
       v-model="searchTerm"
       @input="handleSearch"
-      :placeholder="'search' + '  ' + searchArea"
+      :placeholder="'Search ' + searchArea"
       class="search-home"
     />
-    <button class="microphone" @click="handleVoiceSearch">
+    <!-- <span class="microphone-icon">&#127908;</span> -->
+    <!-- <button class="microphone" @click="handleVoiceSearch">
       <i class="bi bi-mic"></i>
-    </button>
+    </button> -->
     <div class="search-buttons">
       <button @click="searchArea = 'documents'">Documents</button>
       <button @click="searchArea = 'bills'">Bill</button>
@@ -37,11 +38,7 @@
           <i class="bi bi-file-earmark-pdf"></i>
         </button>
         <!-- <button @click="gotoRoute(result)"><i class="bi bi-file-earmark-pdf"></i></button> -->
-        <div
-          class="result-details"
-          @click="gotoRoute(result)"
-        
-        >
+        <div class="result-details" @click="gotoRoute(result)">
           <h3 class="result-title">{{ result.title }}</h3>
           <p class="result-description">{{ result.description }}</p>
           <div class="result-meta">

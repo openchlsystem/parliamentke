@@ -2,7 +2,7 @@
     <div>
         <!-- Bind the class from the prop to the button element -->
         <!-- <button @click="openModal" :class="buttonClass">{{ buttonLabel }}</button> -->
-        <button @click="openModal" :class="['btn', 'btn-primary', buttonClass]">
+        <button @click="openModal" :class="[ 'dropdpwn-arrow',buttonClass]">
           <i :class="iconClass"></i> {{ buttonLabel }}
         </button>
         <transition name="modal-fade">

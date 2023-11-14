@@ -1,23 +1,26 @@
 <template>
 
+
   <div class="metric-area">
-    
+    <!-- <div class="side-panel">
+      <h3>Nav</h3>
+    </div> -->
     <div class="metric-top">
       <div class="metric-cards">
         <div class="metric-card">
-          <p>{{ motionCount }}</p>
-          <h3>{{businessType}}</h3>
+          <p>{{ billCount }}</p>
+          <h3>Bills</h3>
         </div>
         <div class="metric-card">
           <p>{{ newBills }}</p>
-          <h3>New {{businessType}}</h3>
+          <h3>New Bills</h3>
         </div>
         <div class="metric-card">
-          <p>{{ motionsAdopted }}</p>
-          <h3>{{Bills}} Adopted</h3>
+          <p>{{ billPassed }}</p>
+          <h3>Bills Passed</h3>
         </div>
         <div class="metric-card">
-          <p>{{ percentagemotionsAdopted }}</p>
+          <p>{{ billsRational }}</p>
           <h3>%</h3>
         </div>
       </div>
@@ -131,7 +134,6 @@ export default {
   // },
 
   setup() {
-    const businessType = "Motions";
     const billCount = ref(0);
     const newBills = ref(0);
     const motionCount = ref(0);
@@ -168,7 +170,7 @@ export default {
 
     const getBillCountByMonth = async () => {
       try {
-        const response = await axios.get(`/motiontrackers/`);
+        const response = await axios.get(`/billtrackers/`);
         
 
         const chartDataObj = response.data.reduce((acc, curr) => {
@@ -206,7 +208,7 @@ export default {
 
     const getBillsBysponsor = async () => {
       try {
-        const response = await axios.get(`/motiontrackers/`);
+        const response = await axios.get(`/billtrackers/`);
 
         const chartDataObj = response.data.reduce((acc, curr) => {
           if (!acc[curr.sponsor]) {
@@ -233,7 +235,7 @@ export default {
 
     const getActivities = async () => {
       try {
-        const response = await axios.get(`/motiontrackers/`, {
+        const response = await axios.get(`/billtrackers/`, {
           params: {
             // filereference: props.id
           },
@@ -282,7 +284,7 @@ export default {
 
     const getBillCount = async () => {
       try {
-        const response = await axios.get(`/motiontrackers/`);
+        const response = await axios.get(`/billtrackers/`);
         billCount.value = response.data.length;
         console.log("billCount", billCount.value);
       } catch (error) {
@@ -292,7 +294,7 @@ export default {
 
     const getNewBills = async () => {
       try {
-        const response = await axios.get(`/motiontrackers/`, {
+        const response = await axios.get(`/billtrackers/`, {
           params: {
             status: "new",
           },
@@ -306,7 +308,7 @@ export default {
 
     const getBillPassed = async () => {
       try {
-        const response = await axios.get(`/motiontrackers/`, {
+        const response = await axios.get(`/billtrackers/`, {
           params: {
             status: "Commencement",
           },
@@ -423,7 +425,6 @@ export default {
       getBillsBysponsor,
       getBillCountByMonth,
       chartDataComputed3,
-      businessType,
       
       
     };

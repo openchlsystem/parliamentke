@@ -139,43 +139,11 @@ class Category(models.Model):
         return self.name
 
 
-class BillTracker(models.Model):
-    date = models.DateField(null=True, blank=True)
-    serialno = models.CharField(max_length=100)
-    bill = models.CharField(max_length=100)
-    description = models.CharField(max_length=500)
-    sponsor = models.CharField(max_length=100)
-    billnumber = models.CharField(max_length=100)
-    maturity_date = models.DateField(null=True, blank=True)
-    seconder = models.CharField(max_length=100, null=True, blank=True)
-    status = models.CharField(max_length=100, default="new")
-    gazette_no = models.CharField(max_length=100)
-    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
-    function = models.CharField(max_length=255, null=True, blank=True,default="Legislation")
-    document = models.CharField(max_length=255, null=True, blank=True,default="Bills")
 
-class BillTrackerActivity(models.Model):
-    BillTracker = models.ForeignKey(BillTracker, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
-    description = models.CharField(max_length=5000)
-    status = models.CharField(max_length=100)
-    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
-    
     
 
-class PetitionTracker(models.Model):
-    date = models.DateField(default=timezone.now)
-    presenter = models.CharField(max_length=100)
-    petitioner = models.CharField(max_length=100)
-    subject = models.CharField(max_length=5000)
-    date_due = models.DateField(default=timezone.now)
-    status = models.CharField(max_length=100, default="new")
     
-class PetitiontrackerActivity(models.Model):
-    PetitionTracker = models.ForeignKey(PetitionTracker, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
-    description = models.CharField(max_length=5000)
-    status = models.CharField(max_length=100)
+
     
     
 
@@ -186,7 +154,11 @@ class MotionTracker(models.Model):
     seconder = models.CharField(max_length=100)
     status = models.CharField(max_length=100,default="new")
     
-    
+
+class MotionTrackerActivity(models.Model):
+    description = models.TextField(max_length=5000)
+    MotionTracker = models.ForeignKey(MotionTracker, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100)  
 
 
 
@@ -234,5 +206,48 @@ class committees(models.Model):
     
     
 class CommitteeMembers(models.Model):
-    members = models.ForeignKey(Members, on_delete=models.CASCADE)
+    member = models.ForeignKey(Members, on_delete=models.CASCADE)
     committee = models.ForeignKey(committees, on_delete=models.CASCADE)
+    
+class BillTracker(models.Model):
+    date = models.DateField(null=True, blank=True)
+    serialno = models.CharField(max_length=100)
+    bill = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    sponsor = models.CharField(max_length=100)
+    billnumber = models.CharField(max_length=100)
+    maturity_date = models.DateField(null=True, blank=True)
+    seconder = models.CharField(max_length=100, null=True, blank=True)
+    status = models.CharField(max_length=100, default="new")
+    gazette_no = models.CharField(max_length=100)
+    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    function = models.CharField(max_length=255, null=True, blank=True,default="Legislation")
+    document = models.CharField(max_length=255, null=True, blank=True,default="Bills")
+    committee = models.ForeignKey(committees, on_delete=models.CASCADE, null=True, blank=True)
+    referred = models.BooleanField(default=False)
+    
+
+class BillTrackerActivity(models.Model):
+    BillTracker = models.ForeignKey(BillTracker, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    description = models.CharField(max_length=5000)
+    status = models.CharField(max_length=100)
+    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    
+    
+
+class PetitionTracker(models.Model):
+    date = models.DateField(default=timezone.now)
+    presenter = models.CharField(max_length=100)
+    petitioner = models.CharField(max_length=100)
+    subject = models.CharField(max_length=5000)
+    date_due = models.DateField(default=timezone.now)
+    status = models.CharField(max_length=100, default="new")
+    committee = models.ForeignKey(committees, on_delete=models.CASCADE, null=True, blank=True)
+    
+    
+class PetitiontrackerActivity(models.Model):
+    PetitionTracker = models.ForeignKey(PetitionTracker, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    description = models.CharField(max_length=5000)
+    status = models.CharField(max_length=100)

@@ -10,16 +10,17 @@
     </div>
 
     <div class="motion-list" v-if="showDiv === 'billtracker'">
-      <ModalPopup
-        v-if="showDiv === 'billtracker'"
-        :buttonLabel="`Add Bill`"
-        :buttonClass="customButtonClass"
-        :iconClass="customIconClass"
-      >
-        <BillsTracker />
-        <h2>Bills</h2>
-      </ModalPopup>
-    
+      <div class="header-buttons">
+        <ModalPopup
+          v-if="showDiv === 'billtracker'"
+          :buttonLabel="`Add Bill`"
+          :buttonClass="customButtonClass"
+          :iconClass="customIconClassBill"
+        >
+          <BillsTracker />
+          <h2>Bills</h2>
+        </ModalPopup>
+      </div>
 
       <!-- {{BillsSample}} -->
 
@@ -48,18 +49,43 @@
               </a>
             </div>
           </div>
-          <nav class="bill-nav">
-            <ModalPopup buttonLabel="Add Document">
+
+          <div class="update">
+            <ModalPopup buttonLabel="Add Document"
+            :buttonClass="customButtonClass"
+            :iconClass="customIconClassDocument"
+            >
               <AddDocument :billid="document.id" />
             </ModalPopup>
             <ModalPopup
               :buttonLabel="`Update`"
               :buttonClass="customButtonClass"
               :iconClass="customIconClass"
+
             >
               <BillActivity :billid="document.id" />
             </ModalPopup>
-          </nav>
+            <ModalPopup
+              :buttonLabel="`Assign Bill`"
+              :buttonClass="customButtonClass"
+              :iconClass="customIconClass"
+              :committee="committee"
+            >
+              <div class="commitee-members">
+                <select name="members" id="" v-model="selectedCommittee">
+                  <option
+                    v-for="bill in committees"
+                    :key="bill.id"
+                    :value="bill.id"
+                  >
+                    {{ bill.name }}
+                  </option>
+                </select>
+              </div>
+
+              <button @click="assignBill(document)">Assign Bill</button>
+            </ModalPopup>
+          </div>
         </li>
       </ul>
     </div>
@@ -81,16 +107,60 @@
             <span class="motion-subject">Subject: {{ motion.subject }}</span>
             <span class="motion-proposer">Proposer: {{ motion.proposer }}</span>
             <span class="motion-seconder">Seconder: {{ motion.seconder }}</span>
-            <button
-              v-if="motion.status === 'adopted'"
-              class="adopted-button"
-              disabled
-            >
-              Adopted
-            </button>
-            <button v-else @click="patchAdopt(motion)" class="adopt-button">
-              Adopt Motion
-            </button>
+
+            <div class="update">
+                <ModalPopup
+                :buttonLabel="`Add: Document`"
+                :buttonClass="customButtonClass"
+                :iconClass="customIconClassDocument"
+                
+              >
+                <FileActivities
+                  :fileid="motion.id"
+                  :title="motion.petitioner"
+                  :description="motion.subject"
+                />
+              </ModalPopup>
+              <ModalPopup
+                buttonLabel="Update Status"
+                :buttonClass="customButtonClass"
+                :iconClass="customIconClass"
+                @click="petionId = motion.id"
+              >
+                <div class="form-popup">
+                  <form @submit.prevent="addMotionActivity(motion)">
+                    <label for="status">Motion Status:</label>
+                    <select v-model="motionActivity.status">
+                      <option
+                        v-for="status in MotionHandlingProcess"
+                        :key="status.id"
+                        :value="status.step"
+                      >
+                        {{ status.step }}
+                      </option>
+                    </select>
+                    <textarea
+                      name="description"
+                      cols="30"
+                      rows="10"
+                      v-model="motionActivity.description"
+                    ></textarea>
+                    <button type="submit">Update</button>
+                  </form>
+                </div>
+              </ModalPopup>
+            
+              <button
+                v-if="motion.status === 'adopted'"
+                class="adopted-button"
+                disabled
+              >
+                Adopted
+              </button>
+              <button v-else @click="patchAdopt(motion)" class="adopt-button">
+                Adopt Motion
+              </button>
+            </div>
           </div>
         </li>
       </ul>
@@ -126,7 +196,6 @@
               >
             </div>
             <div class="update">
-            
               <ModalPopup
                 :buttonLabel="`Add: Document`"
                 :buttonClass="customButtonClass"
@@ -148,9 +217,52 @@
                   <form @submit.prevent="addPetionActivity(motion)">
                     <label for="status">Status:</label>
                     <select v-model="petitionActivity.status">
-                      <option value="ongoing">Ongoing</option>
-                      <option value="pending">Pending</option>
-                      <option value="concluded">Concluded</option>
+                      <option
+                        v-for="status in PetitionHandlingProcess"
+                        :key="status.id"
+                        :value="status.stage"
+                      >
+                        {{ status.stage }}
+                      </option>
+                    </select>
+                    <textarea
+                      name="description"
+                      cols="30"
+                      rows="10"
+                      v-model="petitionActivity.description"
+                    ></textarea>
+                    <button type="submit">Update</button>
+                  </form>
+                </div>
+              </ModalPopup>
+              <ModalPopup
+                buttonLabel="Refer Petition"
+                :buttonClass="customButtonClass"
+                :iconClass="customIconClass"
+                @click="petionId = motion.id"
+              >
+                <div class="form-popup">
+                  <form @submit.prevent="addPetionActivity(motion)">
+                    <label for="status">Refer:</label>
+                    <select v-model="selectedCommittee">
+                      <option
+                        v-for="status in committees"
+                        :key="status.id"
+                        :value="status.id"
+                      >
+                        {{ status.name }}
+                      </option>
+                    </select>
+
+                    <label for="status">Status:</label>
+                    <select v-model="petitionActivity.status">
+                      <option
+                        v-for="status in PetitionHandlingProcess"
+                        :key="status.id"
+                        :value="status.stage"
+                      >
+                        {{ status.stage }}
+                      </option>
                     </select>
                     <textarea
                       name="description"
@@ -188,6 +300,8 @@ import { BillsSample } from "@/utils/BillsSample.js";
 import { updatedBillsSample } from "@/utils/BillsSample.js";
 import Dashboard from "@/views/DashboardPage.vue";
 import BillActivity from "@/views/BillTrackerActivity.vue";
+import { PetitionHandlingProcess } from "@/utils/PetitionHandlingProcess.js";
+import { MotionHandlingProcess } from "@/utils/MotionHandlingProcess.js";
 
 export default {
   components: {
@@ -206,6 +320,8 @@ export default {
       buttonLabel: "Upload Documents",
       customButtonClass: "update-button",
       customIconClass: "bi bi-pencil",
+      customIconClassBill: "bi bi-plus ",
+      customIconClassDocument: "bi bi-file-pdf ",
     };
   },
   setup() {
@@ -218,12 +334,26 @@ export default {
     const motions = ref([]);
     const tableref = ref([]);
     const petitionId = ref("");
+    const committees = ref([]);
+    const selectedCommittee = ref("");
+
+    const getCommittees = async () => {
+      const response = await axios.get("/committees/");
+      committees.value = response.data;
+    };
 
     const petitionActivity = reactive({
       date: new Date(),
       description: "",
       status: "",
       PetitionTracker: null,
+    });
+
+    const motionActivity = reactive({
+      date: new Date(),
+      description: "",
+      status: "",
+      MotionTracker: null,
     });
 
     const getBills = async () => {
@@ -249,8 +379,6 @@ export default {
       }
     };
 
-   
-
     const patchAdopt = async (motion) => {
       const response = await axios.patch(`/motiontrackers/${motion.id}/`, {
         status: "adopted",
@@ -269,8 +397,37 @@ export default {
       );
       const response2 = await axios.patch(`/petitiontrackers/${motion.id}/`, {
         status: petitionActivity.status,
+        committee: selectedCommittee.value,
       });
       response, response2;
+    };
+
+    const addMotionActivity = async (motion) => {
+      console.log("motion", motion);
+      motionActivity.MotionTracker = motion.id;
+      const response = await axios.post(
+        "/motionactivitytracker/",
+        motionActivity
+      );
+      const response2 = await axios.patch(`/motiontrackers/${motion.id}/`, {
+        status: motionActivity.status,
+        // committee: selectedCommittee.value,
+      });
+      response, response2;
+    };
+
+    const assignBill = (document) => {
+      axios
+        .patch(`/billtrackers/` + document.id + "/", {
+          committee: selectedCommittee.value,
+          referred : true,
+        })
+        .then(() => {
+          getCommittees();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     // Watch for changes in the `showDiv` prop and call `getDocuments` when it changes
@@ -280,6 +437,7 @@ export default {
       getBills();
       getMotions();
       getPetitions();
+      getCommittees();
     });
 
     return {
@@ -299,6 +457,14 @@ export default {
       addPetionActivity,
       petitionId,
       updatedBillsSample,
+      PetitionHandlingProcess,
+      getCommittees,
+      committees,
+      selectedCommittee,
+      addMotionActivity,
+      motionActivity,
+      MotionHandlingProcess,
+      assignBill,
     };
   },
 };

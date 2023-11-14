@@ -84,6 +84,11 @@ class MotionTrackerSerializer(serializers.ModelSerializer):
     class Meta:
         model = MotionTracker
         fields = '__all__'
+        
+class MotionTrackerActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MotionTrackerActivity
+        fields = '__all__'
 
 class DocumentIndexSerializer(serializers.ModelSerializer):
     # date = serializers.DateField(format='%d/%m/%Y', input_formats=['%d/%m/%Y', 'iso-8601'])

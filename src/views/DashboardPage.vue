@@ -5,7 +5,8 @@
       
 
       <div class="dropdown">
-        <button class="dropbtn">Select a Dashboard</button>
+        <button  class="dropbtn dropdown-arrow" v-if="selectedArea === ''">Select a Dashboard</button>
+        <button class="dropbtn dropdown-arrow" v-else>Selected: {{ selectedArea }}</button>
         <div class="dropdown-content">
           <a href="#" @click="selectedArea = 'bills'">Bills</a>
           <a href="#" @click="selectedArea = 'petitions'">Petitions</a>
@@ -18,6 +19,24 @@
         </div>
       </div>
     </div>
+
+    <div class="dashboard" v-if="selectedArea === 'documents'">
+
+
+      <DocumentsDashboard />  
+
+      
+
+    </div>
+    
+    <div class="dashboard" v-if="selectedArea === 'committees'">
+      <CommitteesDashboard   />
+      </div>  
+
+    <div class="dashboard" v-if="selectedArea === 'members'">
+
+    <MembersDashboard />
+      </div>
 
     <div class="dashboard" v-if="selectedArea === 'bills'">
       <billsDashboard />
@@ -36,6 +55,10 @@ import { ref } from "vue";
 import billsDashboard from "@/dashboards/BillsDashboard";
 import motionsDashboard from "@/dashboards/MotionsDashboard";
 import petitionsDashboard from "@/dashboards/PetitionsDashboard";
+import DocumentsDashboard from "@/dashboards/DocumentsDashboard";
+import CommitteesDashboard from "@/dashboards/CommitteesDashboard";
+import MembersDashboard from "@/dashboards/MembersDashboard";
+// import { Committees } from "@/utils/Committees";
 
 export default {
   name: "DashboardPage",
@@ -44,9 +67,14 @@ export default {
     billsDashboard,
     motionsDashboard,
     petitionsDashboard,
-  },
+    // Committees,
+    DocumentsDashboard,
+    MembersDashboard,
+    CommitteesDashboard
+
+},
   setup() {
-    const selectedArea = ref("bills");
+    const selectedArea = ref("");
     return {
       selectedArea,
     };
