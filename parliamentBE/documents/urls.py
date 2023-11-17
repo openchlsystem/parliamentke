@@ -54,5 +54,17 @@ urlpatterns = [
     
     path('committeesmembers/', CommitteeMembersListCreateView.as_view(), name='committeesmembers-list-create'),
     path('committeesmembers/<int:pk>/', CommitteeMembersDetailView.as_view(), name='committeesmembers-detail'),
+    
+    path('eventstracker/', EventsTrackerListCreateView.as_view(), name='eventstracker-list-create'),
+    path('eventstracker/<int:pk>/', EventsTrackerDetailView.as_view(), name='eventstracker-detail'),
+    
+    path('eventstrackeractivity/', EventsTrackerActivityListCreateView.as_view(), name='eventstrackeractivity-list-create'),
+    path('eventstrackeractivity/<int:pk>/', EventsTrackerActivityDetailView.as_view(), name='eventstrackeractivity-detail'),
+    
+    path('OrderPaper/', OrderPaperListCreateView.as_view(), name='orderpaper-list-create'),
+    path('OrderPaper/<int:pk>/', OrderPaperDetailView.as_view(), name='orderpaper-detail'),
+    
+    path('OrderPaperDetails/', OrderPaperDetailsListCreateView.as_view(), name='orderpaperdetails-list-create'),
+    path('OrderPaperDetails/<int:pk>/', OrderPaperDetailsDetailView.as_view(), name='orderpaperdetails-detail'),
    
 ]

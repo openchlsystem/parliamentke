@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import StandingOrders from "@/utils/standingOrder";
+import {StandingOrders} from "@/utils/standingOrder";
 import { BillsSample } from "@/utils/BillsSample.js";
 import { updatedBillsSample } from "@/utils/BillsSample.js";
 import { updatedData } from "@/utils/Petions";

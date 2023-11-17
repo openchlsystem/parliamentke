@@ -251,3 +251,36 @@ class PetitiontrackerActivity(models.Model):
     date = models.DateTimeField(default=timezone.now)
     description = models.CharField(max_length=5000)
     status = models.CharField(max_length=100)
+    
+
+class Eventstracker(models.Model):
+    event_name = models.CharField(max_length=100)
+    event_date = models.DateField(null=True, blank=True)
+    location = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    organizer = models.CharField(max_length=100)
+    # attendees = models.ManyToManyField(Members)
+    # file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+
+
+class EventstrackerActivity(models.Model):
+    Eventstracker = models.ForeignKey(Eventstracker, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    description = models.CharField(max_length=5000)
+    status = models.CharField(max_length=100)
+    
+class OrderPaper(models.Model):
+    OrderPaperNumber = models.CharField(max_length=100)
+    Parliament = models.CharField(max_length=100)
+    OrderPaperDate = models.DateField(default=timezone.now)
+    OrderPaperDescription = models.CharField(max_length=500)
+    OrderPaperFile = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    
+
+class OrderPaperDetails(models.Model):
+    OrderPaper = models.ForeignKey(OrderPaper, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    prayer = models.CharField(max_length=100)
+    description = models.CharField(max_length=5000)
+    file = models.FileField(upload_to='uploads/', null=True, blank=True)  # 'upload_to' specifies the subdirectory within 'MEDIA_ROOT'
+    status = models.CharField(max_length=100)

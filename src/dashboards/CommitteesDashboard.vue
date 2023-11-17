@@ -1,11 +1,31 @@
 <template>
-
-
   <div class="metric-area">
     <!-- <div class="side-panel">
       <h3>Nav</h3>
     </div> -->
     <div class="metric-top">
+      <h3>Bills</h3>
+      <hr />
+      <div class="metric-cards">
+        <div class="metric-card">
+          <p>{{ committeecount }}</p>
+          <h3>House Committees</h3>
+        </div>
+        <div class="metric-card">
+          <p>{{ billwithnoassignmentcount }}</p>
+          <h3>Bills Pending Assignment</h3>
+        </div>
+        <div class="metric-card">
+          <p>{{ billwithassignmentcount }}</p>
+          <h3>Bills Assigned</h3>
+        </div>
+        <div class="metric-card">
+          <p>{{ billsRational }}</p>
+          <h3>%</h3>
+        </div>
+      </div>
+      <h3>Petitions</h3>
+      <hr />
       <div class="metric-cards">
         <div class="metric-card">
           <p>{{ committeecount }}</p>
@@ -26,8 +46,6 @@
       </div>
 
       <div class="charts">
-        
-
         <div class="dashboard-item">
           <GChart
             type="PieChart"
@@ -38,12 +56,20 @@
         </div>
         <div class="dashboard-item">
           <GChart
+            type="PieChart"
+            :data="chartDataComputed"
+            :options="chartOptions"
+          />
+          <h3>Petitions By Status</h3>
+        </div>
+        <div class="dashboard-item">
+          <GChart
             type="ColumnChart"
             :data="chartDataComputed3"
             :options="chartOptions3"
           />
 
-          <h3>Bill By Month</h3>
+          <h3>Bills Assigned By Committee</h3>
         </div>
         <div class="dashboard-item">
           <GChart
@@ -51,7 +77,7 @@
             :data="chartDataComputed2"
             :options="chartOptions"
           />
-          <h3>Bill By Stage</h3>
+          <h3>Petitions Assigned By Committee</h3>
         </div>
         <div class="dashboard-item">
           <GChart
@@ -160,23 +186,22 @@ export default {
         chart: {
           title: "Bill by Sponser",
           subtitle: "Count of each sponser",
-        }
+        },
       },
       chartOptions3: {
         chart: {
           title: "Bill by Sponsor",
           subtitle: "Count of each sponsor",
-        }
-      }
+        },
+      },
     });
-
 
     const getBillsWithNoAssigmentCount = async () => {
       try {
         const response = await axios.get(`/billtrackers/`, {
           params: {
-            referred:false,
-          }
+            referred: false,
+          },
         });
         billwithnoassignmentcount.value = response.data.length;
       } catch (error) {
@@ -188,8 +213,8 @@ export default {
       try {
         const response = await axios.get(`/billtrackers/`, {
           params: {
-            referred:true,
-          }
+            referred: true,
+          },
         });
         billwithassignmentcount.value = response.data.length;
       } catch (error) {
@@ -206,18 +231,16 @@ export default {
       }
     };
 
-
     const getBillCountByMonth = async () => {
       try {
         const response = await axios.get(`/billtrackers/`);
-        
 
         const chartDataObj = response.data.reduce((acc, curr) => {
           const month = new Date(curr.date).getMonth() + 1;
           const year = new Date(curr.date).getFullYear();
-          
+
           const key = `${month}/${year}`;
-          
+
           if (!acc[key]) {
             acc[key] = 1;
           } else {
@@ -225,25 +248,26 @@ export default {
           }
           return acc;
         }, {});
-        
-        state.chartData3 = Object.entries(chartDataObj).reduce(
-          (acc, [key, value]) => {
-            acc.push([key, value]);
-            return acc;
-          },
-          [["month", "Count"]]
-        ).sort((a, b) => {
-          const [monthA, yearA] = a[0].split('/');
-          const [monthB, yearB] = b[0].split('/');
-          return new Date(yearA, monthA - 1) - new Date(yearB, monthB - 1);
-        });
-        
+
+        state.chartData3 = Object.entries(chartDataObj)
+          .reduce(
+            (acc, [key, value]) => {
+              acc.push([key, value]);
+              return acc;
+            },
+            [["month", "Count"]]
+          )
+          .sort((a, b) => {
+            const [monthA, yearA] = a[0].split("/");
+            const [monthB, yearB] = b[0].split("/");
+            return new Date(yearA, monthA - 1) - new Date(yearB, monthB - 1);
+          });
+
         console.log("billCount", billCount.value);
       } catch (error) {
         console.error("Error fetching documents:", error);
       }
     };
-
 
     const getBillsBysponsor = async () => {
       try {
@@ -309,10 +333,6 @@ export default {
       }
     };
 
-
-
-
-
     const chartDataComputed = computed(() => state.chartData);
 
     const chartDataComputed2 = computed(() => state.chartData2);
@@ -323,7 +343,7 @@ export default {
 
     const getBillCount = async () => {
       try {
-        const response = await axios.get(`/billtrackers/`,);
+        const response = await axios.get(`/billtrackers/`);
         billCount.value = response.data.length;
         console.log("billCount", billCount.value);
       } catch (error) {
@@ -473,10 +493,6 @@ export default {
       billwithnoassignmentcount,
       getBillsWithAssigment,
       billwithassignmentcount,
-
-      
-      
-      
     };
   },
 };

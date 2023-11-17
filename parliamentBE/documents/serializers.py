@@ -117,3 +117,30 @@ class CommitteeMembersSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommitteeMembers
         fields = '__all__'
+        
+
+class EventsTrackerSerializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = Eventstracker
+        fields = '__all__'
+        
+class EventsTrackerActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EventstrackerActivity
+        fields = '__all__'
+        
+
+class OrderPaperSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderPaper
+        fields = '__all__'
+        
+
+class OrderPaperDetailsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderPaperDetails
+        fields = '__all__'

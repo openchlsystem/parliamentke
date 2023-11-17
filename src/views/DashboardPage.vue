@@ -11,9 +11,9 @@
           <a href="#" @click="selectedArea = 'bills'">Bills</a>
           <a href="#" @click="selectedArea = 'petitions'">Petitions</a>
           <a href="#" @click="selectedArea = 'motions'">Motions</a>
-          <a href="#" @click="selectedArea = 'documents'">Documents</a>
-          <a href="#" @click="selectedArea = 'committees'">Committers</a>
+          <a href="#" @click="selectedArea = 'committees'">Committees</a>
           <a href="#" @click="selectedArea = 'members'">Members</a>
+          <a href="#" @click="selectedArea = 'documents'">Documents</a>
        
 
         </div>

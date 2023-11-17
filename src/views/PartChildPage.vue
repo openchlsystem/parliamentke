@@ -43,6 +43,10 @@ export default {
       type: Array,
       required: true,
     },
+    selectedDocument: {
+      type: String,
+      required: true,
+    }
   },
 
   components: {
@@ -56,7 +60,7 @@ export default {
     const filteredPartList = computed(() => {
       const textId = props.text_id;
       if (documentlist.value && textId) {
-        return documentlist.value.filter(item => item.parent === textId);
+        return documentlist.value.filter(item => item.heirarchy === "Part" && item.document === props.selectedDocument);
       }
       return [];
     });

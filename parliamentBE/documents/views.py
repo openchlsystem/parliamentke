@@ -227,5 +227,47 @@ class CommitteeMembersListCreateView(generics.ListCreateAPIView):
 class CommitteeMembersDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CommitteeMembers.objects.all()
     serializer_class = CommitteeMembersSerializer
+    
+
+class EventsTrackerListCreateView(generics.ListCreateAPIView):
+    queryset = Eventstracker.objects.all()
+    serializer_class = EventsTrackerSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'event_name', 'event_date']
+    
+class EventsTrackerDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Eventstracker.objects.all()
+    serializer_class = EventsTrackerSerializer
 
 
+class EventsTrackerActivityListCreateView(generics.ListCreateAPIView):
+    queryset = EventstrackerActivity.objects.all()
+    serializer_class = EventsTrackerActivitySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'description','Eventstracker']
+    
+class EventsTrackerActivityDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = EventstrackerActivity.objects.all()
+    serializer_class = EventsTrackerActivitySerializer
+
+class OrderPaperListCreateView(generics.ListCreateAPIView):
+    queryset = OrderPaper.objects.all()
+    serializer_class = OrderPaperSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'Parliament', 'OrderPaperNumber','OrderPaperDate']
+    
+    
+class OrderPaperDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = OrderPaper.objects.all()
+    serializer_class = OrderPaperSerializer
+    
+class OrderPaperDetailsListCreateView(generics.ListCreateAPIView):
+    queryset = OrderPaperDetails.objects.all()
+    serializer_class = OrderPaperDetailsSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id', 'OrderPaper',]
+    
+    
+class OrderPaperDetailsDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = OrderPaperDetails.objects.all()
+    serializer_class = OrderPaperDetailsSerializer

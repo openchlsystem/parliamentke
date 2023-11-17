@@ -79,6 +79,11 @@ const routes = [
     name: "events",
     component: () => import("../views/CalenderPage.vue"),
   },
+  {
+    path: "/orderPaper",
+    name: "orderPaper",
+    component: () => import("../views/OrderPaperPage.vue"),
+  }
 
 
 

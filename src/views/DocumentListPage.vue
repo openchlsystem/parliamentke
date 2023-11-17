@@ -1,7 +1,7 @@
 <template>
   <div class="document-search">
     <!-- Your template content goes here -->
-    <h1>Document Filter</h1>
+    <h2>Advanced Text Search</h2>
 
     <div class="header-buttons">
       <select name="documentname" id="" v-model="selectedDocument">
@@ -20,7 +20,7 @@
     <!-- {{ documentlist }} -->
 
     <div class="child-items">
-      <PartChild :text_id="selectedDocument.text_id" :documentlist="documentlist" />
+      <PartChild :text_id="selectedDocument.text_id" :documentlist="documentlist" :selectedDocument="selectedDocument.document" />
     </div>
   </div>
 </template>
