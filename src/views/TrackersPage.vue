@@ -16,9 +16,9 @@
           :buttonLabel="`Add Bill`"
           :buttonClass="customButtonClass"
           :iconClass="customIconClassBill"
+          :modalHeader="`Add Bill`"
         >
           <BillsTracker />
-          <h2>Bills</h2>
         </ModalPopup>
       </div>
 
@@ -71,7 +71,7 @@
               :iconClass="customIconClass"
               :committee="committee"
             >
-              <div class="commitee-members">
+              <div class="commitee-members add-bill">
                 <select name="members" id="" v-model="selectedCommittee">
                   <option
                     v-for="bill in committees"

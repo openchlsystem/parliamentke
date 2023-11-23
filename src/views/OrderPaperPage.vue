@@ -3,41 +3,23 @@
     <h2>Order Paper</h2>
   </div>
   <div class="button-headers">
-    <ModalPopup buttonLabel="Add House Business">
-      <div class="form">
-        <h1>Order Paper Form</h1>
-
+    <ModalPopup buttonLabel="Add House Business" modalHeader="Add House Business">
+      <div class="add-bill">
         <form @submit.prevent="submitForm">
           <label for="order-paper-number">Order Paper Number</label>
-          <input
-            v-model="orderPaper.OrderPaperNumber"
-            id="order-paper-number"
-            type="text"
-          />
+          <input v-model="orderPaper.OrderPaperNumber" id="order-paper-number" type="text" />
 
           <label for="parliament">Parliament</label>
           <input v-model="orderPaper.Parliament" id="parliament" type="text" />
 
           <label for="order-paper-date">Order Paper Date</label>
-          <input
-            v-model="orderPaper.OrderPaperDate"
-            id="order-paper-date"
-            type="date"
-          />
+          <input v-model="orderPaper.OrderPaperDate" id="order-paper-date" type="date" />
 
           <label for="description">Order Paper Description</label>
-          <textarea
-            v-model="orderPaper.OrderPaperDescription"
-            id="description"
-          ></textarea>
+          <textarea v-model="orderPaper.OrderPaperDescription" id="description"></textarea>
 
           <label for="order-paper-file">Order Paper File</label>
-          <input
-            ref="fileInput"
-            id="order-paper-file"
-            type="file"
-            @change="handleFileChange"
-          />
+          <input ref="fileInput" id="order-paper-file" type="file" @change="handleFileChange" />
 
           <button type="submit">Submit</button>
         </form>
@@ -59,52 +41,30 @@
           <a href="{{ item.OrderPaperFile }}">download file</a>
         </p>
 
-        <ModalPopup
-          buttonLabel="Add Prayer"
-          :buttonClass="customButtonClass"
-          :iconClass="customIconClass"
-          @click=updateOrderPaperID(item.id)
-        >
-          <div class="form-popup">
-            <form @submit.prevent="submitPrayer">
-              <div>
-                <label>Date</label>
-                <input type="date" v-model="orderPaperDetails.date" />
-              </div>
-              <div>
-                <label>Prayer</label>
-                <select name="prayer" v-model="orderPaperDetails.prayer">
-                  <option
-                    v-for="prayer in Prayers"
-                    :key="prayer.id"
-                    :value="prayer.item_type"
-                  >
-                    {{ prayer.item_type }}
-                  </option>
-                </select>
-              </div>
-              <div>
-                <label>Description</label>
-                <textarea v-model="orderPaperDetails.description"></textarea>
-              </div>
-              <div>
-                <label>File</label>
-                <input type="file" @change="onFileChangePrayer" ref="orderPaperDetails.file"/>
-              </div>
-              <div>
-                <label>Status</label>
-                <select v-model="orderPaperDetails.status">
-                  <option value="pending">Pending</option>
-                  <option value="approved">Approved</option>
-                  <option value="rejected">Rejected</option>
-                </select>
-              </div>
-              <input type="text" v-model="orderPaperDetails.orderPaper">
-              <button type="submit">Submit</button>
-            </form>
-          </div>
-        </ModalPopup>
-        <button>Add to Events</button>
+        <div class="header-buttons">
+          <ModalPopup buttonLabel="Add Prayer" :buttonClass="customButtonClass" :iconClass="customIconClass"
+            @click="updateOrderPaperID(item.id)" :orderpaperID="item.id">
+
+            <AddPrayer />
+
+          </ModalPopup>
+          <ModalPopup :buttonClass="customButtonClass" :iconClass="customIconClassDocument" buttonLabel="View Details"
+            @click="viewOrderPaperDetails(item)">
+            <H2>Details </H2>
+
+           
+
+            <ul>
+              <li v-for="item in orderPaperChildDetails" :key="item.id">
+                <p><span>Date</span> {{ item.date }}</p>
+                <p><span>Prayer</span> {{ item.prayer }}</p>
+                <p><span>Description</span> {{ item.description }}</p>
+                <p><span>Status</span> {{ item.status }}</p>
+              </li>
+            </ul>
+          </ModalPopup>
+          <button @click="viewOrderPaperDetails(item)">View Details</button>
+        </div>
       </li>
     </ul>
   </div>
@@ -115,12 +75,15 @@ import { ref, onMounted, reactive } from "vue";
 import axios from "@/utils/axios";
 import ModalPopup from "@/components/ModalComponent.vue";
 import { Prayers } from "@/utils/Prayers";
+import AddPrayer from "@/views/AddPrayer.vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "OrderPaper",
 
   components: {
     ModalPopup,
+    AddPrayer,
   },
 
   data() {
@@ -150,6 +113,14 @@ export default {
       status: "",
       OrderPaper: null,
     });
+
+    const orderPaperChildDetails = ref(null);
+
+    const router = useRouter();
+
+    const viewOrderPaperDetails = async (item) => {
+      router.push(`/orderPaperDetails/${item.id}`);
+    };
 
     const orderPaperID = ref(null);
 
@@ -200,27 +171,27 @@ export default {
 
     const submitPrayer = async () => {
       const formData = new FormData();
-      formData.append('date', orderPaperDetails.date);
-      formData.append('prayer', orderPaperDetails.prayer);
-      formData.append('description', orderPaperDetails.description);
-      formData.append('file', orderPaperDetails.file);
-      formData.append('status', orderPaperDetails.status);
-      formData.append('OrderPaper', orderPaperID.value);
+      formData.append("date", orderPaperDetails.date);
+      formData.append("prayer", orderPaperDetails.prayer);
+      formData.append("description", orderPaperDetails.description);
+      formData.append("file", orderPaperDetails.file);
+      formData.append("status", orderPaperDetails.status);
+      formData.append("OrderPaper", orderPaperID.value);
 
       try {
-        const response = await axios.post('/OrderPaperDetails/', formData);
-        console.log('Post request successful', response.data);
+        const response = await axios.post("/OrderPaperDetails/", formData);
+        console.log("Post request successful", response.data);
         // Reset the form
         orderPaperDetails.value = {
           date: null,
-          prayer: '',
-          description: '',
+          prayer: "",
+          description: "",
           file: null,
-          status: 'pending',
+          status: "pending",
           OrderPaper: null,
         };
       } catch (error) {
-        console.error('Error in post request', error);
+        console.error("Error in post request", error);
       }
     };
 
@@ -254,6 +225,8 @@ export default {
       submitPrayer,
       updateOrderPaperID,
       orderPaperID,
+      viewOrderPaperDetails,
+      orderPaperChildDetails,
     };
   },
 };

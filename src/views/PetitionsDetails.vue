@@ -46,6 +46,10 @@ import axios from "@/utils/axios";
 import { useFormatDate } from "@/utils/useFormatDate";
 export default {
   props: {
+    orderpaper: {
+      type: Object,
+      required: true,
+    },
     id: {
       type: String,
       required: true,

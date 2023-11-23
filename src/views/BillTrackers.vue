@@ -1,69 +1,71 @@
 <template>
-  <form @submit.prevent="submitBill">
-    <div class="title">
-      <h2>New Bill</h2>
-    </div>
+  <div class="add-bill">
+    <form @submit.prevent="submitBill">
+      <div class="title">
+        <h2>New Bill</h2>
+      </div>
 
-    <!-- <label for="bill_stage">Bill Stage:</label>
+      <!-- <label for="bill_stage">Bill Stage:</label>
             <select name="bill_stage" id="" v-model="selectedStage">
                 <option v-for="stage in legislativeStages" :key="stage.id" :value="stage.stage">
                     {{ stage.stage }}
                 </option>
             </select> -->
-    <!-- {{ selectedStage }} -->
+      <!-- {{ selectedStage }} -->
 
-    <label for="date">Date:</label>
-    <input type="date" id="date" v-model="newBill.date" required />
+      <label for="date">Date:</label>
+      <input type="date" id="date" v-model="newBill.date" required />
 
-    <label for="title">Bill:</label>
-    <input type="text" id="name" v-model="newBill.name" required />
+      <label for="title">Bill:</label>
+      <input type="text" id="name" v-model="newBill.name" required />
 
-    <label for="description"> Description:</label>
-    <textarea
-      id="description"
-      v-model="newBill.description"
-      required
-    ></textarea>
+      <label for="description"> Description:</label>
+      <textarea
+        id="description"
+        v-model="newBill.description"
+        required
+      ></textarea>
 
-    <label for="proposer">Sponsor:</label>
-    <input type="text" id="proposer" v-model="newBill.proposer" required />
+      <label for="proposer">Sponsor:</label>
+      <input type="text" id="proposer" v-model="newBill.proposer" required />
 
-    <label for="Seconder">Seconder</label>
-    <input type="text" id="Seconder" v-model="newBill.seconder" required />
+      <label for="Seconder">Seconder</label>
+      <input type="text" id="Seconder" v-model="newBill.seconder" required />
 
-    <label for="file">Upload Document:</label>
-    <select name="document_type" id="" v-model="selectedDocument">
-      <option>Select Document Type</option>
-      <option
-        v-for="document in kenyanParliamentDocumentTypes"
-        :key="document.id"
-        :value="document"
-      >
-        {{ document.document_name }}
-      </option>
-    </select>
+      <label for="file">Upload Document:</label>
+      <select name="document_type" id="" v-model="selectedDocument">
+        <option>Select Document Type</option>
+        <option
+          v-for="document in kenyanParliamentDocumentTypes"
+          :key="document.id"
+          :value="document"
+        >
+          {{ document.document_name }}
+        </option>
+      </select>
 
-    <!-- {{ selectedDocument.document_name }}{{ selectedDocument.functional_area }} -->
-    <input
-      type="file"
-      name="file"
-      id="file"
-      ref="fileInput"
-      @change="onChange"
-    />
+      <!-- {{ selectedDocument.document_name }}{{ selectedDocument.functional_area }} -->
+      <input
+        type="file"
+        name="file"
+        id="file"
+        ref="fileInput"
+        @change="onChange"
+      />
 
-    <p>size {{ newBill.size }}</p>
+      <p>size {{ newBill.size }}</p>
 
-    <label for="Maturity Date">Maturity Date</label>
-    <input
-      type="date"
-      id="Maturity Date"
-      v-model="newBill.maturity_date"
-      required
-    />
+      <label for="Maturity Date">Maturity Date</label>
+      <input
+        type="date"
+        id="Maturity Date"
+        v-model="newBill.maturity_date"
+        required
+      />
 
-    <button type="submit">Submit</button>
-  </form>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </template>
 
 <script>

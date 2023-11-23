@@ -29,13 +29,13 @@ const routes = [
   },
   {
     path: "/bills/:id/",
-    name: "bills", 
+    name: "bills",
     component: () => import("../views/BillsDetails.vue"),
     props: true,
   },
-    {
+  {
     path: "/petitions/:id/",
-    name: "petitions", 
+    name: "petitions",
     component: () => import("../views/PetitionsDetails.vue"),
     props: true,
   },
@@ -83,10 +83,14 @@ const routes = [
     path: "/orderPaper",
     name: "orderPaper",
     component: () => import("../views/OrderPaperPage.vue"),
-  }
+  },
 
-
-
+  {
+    path: "/orderPaperDetails/:id/",
+    name: "orderPaperDetails",
+    component: () => import("../views/OrderPaperDetails.vue"),
+    props: true,
+  },
 ];
 
 const router = createRouter({

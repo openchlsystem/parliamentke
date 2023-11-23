@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="add-bill">
     <form @submit.prevent="submitBill">
       <div class="title">
         <h2>New Document</h2>

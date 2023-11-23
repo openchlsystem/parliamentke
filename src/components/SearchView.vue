@@ -1,5 +1,5 @@
 <template>
-  {{ searchArea }}
+
   <div class="search">
     <img src="../assets/logo.png" alt="" />
     <input
@@ -13,7 +13,7 @@
     <!-- <button class="microphone" @click="handleVoiceSearch">
       <i class="bi bi-mic"></i>
     </button> -->
-    <div class="search-buttons">
+    <div class="search-buttons :active">
       <button @click="searchArea = 'documents'">Documents</button>
       <button @click="searchArea = 'bills'">Bill</button>
       <button @click="searchArea = 'petitions'">Petition</button>
@@ -66,7 +66,7 @@ export default {
   setup() {
     const searchTerm = ref("");
     const searchResults = reactive([]);
-    const searchArea = ref(null);
+    const searchArea = ref('  ');
     const searchArray = ref([]);
     const router = useRouter();
 
