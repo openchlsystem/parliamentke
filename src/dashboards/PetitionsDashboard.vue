@@ -6,24 +6,29 @@
     <div class="metric-top">
       <div class="metric-cards">
         <div class="metric-card">
+            <span class="bi bi-clipboard custom-icon"></span>
           <p>{{ petitionCount }}</p>
           <h3>Petitions</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-hourglass custom-icon"></span>
           <p>{{ petitionsOngoing }}</p>
           <h3>Ongoing</h3>
         </div>
          <div class="metric-card">
+          <span class="bi bi-three-dots custom-icon"></span>
           <p>{{ petitionsPending }}</p>
           <h3>Pending</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-check custom-icon"></span>
           <p>{{ petitionsConcluded }}</p>
           <h3>Concluded</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-percent custom-icon"></span>
           <p>{{ petitionConcluedPercentage }}</p>
-          <h3>%</h3>
+
         </div>
       </div>
 

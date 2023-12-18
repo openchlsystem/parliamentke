@@ -8,20 +8,25 @@
       <hr />
       <div class="metric-cards">
         <div class="metric-card">
+          <span class="bi bi-people-fill custom-icon"></span>
           <p>{{ committeecount }}</p>
           <h3>House Committees</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-exclamation-circle custom-icon"></span>
           <p>{{ billwithnoassignmentcount }}</p>
           <h3>Bills Pending Assignment</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-person-badge custom-icon"></span>
           <p>{{ billwithassignmentcount }}</p>
           <h3>Bills Assigned</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-percent custom-icon"></span>
+
           <p>{{ billsRational }}</p>
-          <h3>%</h3>
+
         </div>
       </div>
       <h3>Petitions</h3>
@@ -47,81 +52,41 @@
 
       <div class="charts">
         <div class="dashboard-item">
-          <GChart
-            type="PieChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="PieChart" :data="chartDataComputed" :options="chartOptions" />
           <h3>Bills By Status</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="PieChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="PieChart" :data="chartDataComputed" :options="chartOptions" />
           <h3>Petitions By Status</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="ColumnChart"
-            :data="chartDataComputed3"
-            :options="chartOptions3"
-          />
+          <GChart type="ColumnChart" :data="chartDataComputed3" :options="chartOptions3" />
 
           <h3>Bills Assigned By Committee</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="BarChart"
-            :data="chartDataComputed2"
-            :options="chartOptions"
-          />
+          <GChart type="BarChart" :data="chartDataComputed2" :options="chartOptions" />
           <h3>Petitions Assigned By Committee</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="LineChart"
-            :data="chartDataComputed3"
-            :options="chartOptions3"
-          />
+          <GChart type="LineChart" :data="chartDataComputed3" :options="chartOptions3" />
           <h3>Bill by Month</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="AreaChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="AreaChart" :data="chartDataComputed" :options="chartOptions" />
           <h3>Bill by Year Comparison</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="ComboChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="ComboChart" :data="chartDataComputed" :options="chartOptions" />
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="ScatterChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="ScatterChart" :data="chartDataComputed" :options="chartOptions" />
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="BubbleChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="BubbleChart" :data="chartDataComputed" :options="chartOptions" />
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="Histogram"
-            :data="chartDataComputed2"
-            :options="chartOptions2"
-          />
+          <GChart type="Histogram" :data="chartDataComputed2" :options="chartOptions2" />
         </div>
       </div>
     </div>

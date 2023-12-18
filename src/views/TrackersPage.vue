@@ -11,13 +11,8 @@
 
     <div class="motion-list" v-if="showDiv === 'billtracker'">
       <div class="header-buttons">
-        <ModalPopup
-          v-if="showDiv === 'billtracker'"
-          :buttonLabel="`Add Bill`"
-          :buttonClass="customButtonClass"
-          :iconClass="customIconClassBill"
-          :modalHeader="`Add Bill`"
-        >
+        <ModalPopup v-if="showDiv === 'billtracker'" :buttonLabel="`Add Bill`" :buttonClass="customButtonClass"
+          :iconClass="customIconClassBill" :modalHeader="`Add Bill`">
           <BillsTracker />
         </ModalPopup>
       </div>
@@ -32,52 +27,30 @@
               <p class="bill-description">{{ document.description }}</p>
               <span class="bill-date">Date: {{ document.date }}</span>
               <span class="bill-status">Status: {{ document.status }}</span>
-              <span class="bill-maturity-date"
-                >Maturity Date: {{ document.maturity__date }}</span
-              >
-              <a
-                href="#"
-                class="view-details-link"
-                @click="
-                  this.$router.push({
-                    name: 'documents',
-                    params: { id: document.id },
-                  })
-                "
-              >
+              <span class="bill-maturity-date">Maturity Date: {{ document.maturity__date }}</span>
+              <a href="#" class="view-details-link" @click="
+                this.$router.push({
+                  name: 'documents',
+                  params: { id: document.id },
+                })
+                ">
                 View Details
               </a>
             </div>
           </div>
 
           <div class="update">
-            <ModalPopup buttonLabel="Add Document"
-            :buttonClass="customButtonClass"
-            :iconClass="customIconClassDocument"
-            >
+            <ModalPopup buttonLabel="Add Document" :buttonClass="customButtonClass" :iconClass="customIconClassDocument">
               <AddDocument :billid="document.id" />
             </ModalPopup>
-            <ModalPopup
-              :buttonLabel="`Update`"
-              :buttonClass="customButtonClass"
-              :iconClass="customIconClass"
-
-            >
+            <ModalPopup :buttonLabel="`Update`" :buttonClass="customButtonClass" :iconClass="customIconClass">
               <BillActivity :billid="document.id" />
             </ModalPopup>
-            <ModalPopup
-              :buttonLabel="`Assign Bill`"
-              :buttonClass="customButtonClass"
-              :iconClass="customIconClass"
-              :committee="committee"
-            >
+            <ModalPopup :buttonLabel="`Assign Bill`" :buttonClass="customButtonClass" :iconClass="customIconClass"
+              :committee="committee">
               <div class="commitee-members add-bill">
                 <select name="members" id="" v-model="selectedCommittee">
-                  <option
-                    v-for="bill in committees"
-                    :key="bill.id"
-                    :value="bill.id"
-                  >
+                  <option v-for="bill in committees" :key="bill.id" :value="bill.id">
                     {{ bill.name }}
                   </option>
                 </select>
@@ -92,11 +65,7 @@
 
     <div v-if="showDiv === 'motiontracker'" class="motion-list">
       <h2>Motions Tracker</h2>
-      <ModalPopup
-        buttonLabel="Add Motion"
-        :buttonClass="customButtonClass"
-        :iconClass="customIconClass"
-      >
+      <ModalPopup buttonLabel="Add Motion" :buttonClass="customButtonClass" :iconClass="customIconClass">
         <MotionTracker />
       </ModalPopup>
 
@@ -109,52 +78,27 @@
             <span class="motion-seconder">Seconder: {{ motion.seconder }}</span>
 
             <div class="update">
-                <ModalPopup
-                :buttonLabel="`Add: Document`"
-                :buttonClass="customButtonClass"
-                :iconClass="customIconClassDocument"
-                
-              >
-                <FileActivities
-                  :fileid="motion.id"
-                  :title="motion.petitioner"
-                  :description="motion.subject"
-                />
+              <ModalPopup :buttonLabel="`Add: Document`" :buttonClass="customButtonClass"
+                :iconClass="customIconClassDocument">
+                <FileActivities :fileid="motion.id" :title="motion.petitioner" :description="motion.subject" />
               </ModalPopup>
-              <ModalPopup
-                buttonLabel="Update Status"
-                :buttonClass="customButtonClass"
-                :iconClass="customIconClass"
-                @click="petionId = motion.id"
-              >
+              <ModalPopup buttonLabel="Update Status" :buttonClass="customButtonClass" :iconClass="customIconClass"
+                @click="petionId = motion.id">
                 <div class="form-popup">
                   <form @submit.prevent="addMotionActivity(motion)">
                     <label for="status">Motion Status:</label>
                     <select v-model="motionActivity.status">
-                      <option
-                        v-for="status in MotionHandlingProcess"
-                        :key="status.id"
-                        :value="status.step"
-                      >
+                      <option v-for="status in MotionHandlingProcess" :key="status.id" :value="status.step">
                         {{ status.step }}
                       </option>
                     </select>
-                    <textarea
-                      name="description"
-                      cols="30"
-                      rows="10"
-                      v-model="motionActivity.description"
-                    ></textarea>
+                    <textarea name="description" cols="30" rows="10" v-model="motionActivity.description"></textarea>
                     <button type="submit">Update</button>
                   </form>
                 </div>
               </ModalPopup>
-            
-              <button
-                v-if="motion.status === 'adopted'"
-                class="adopted-button"
-                disabled
-              >
+
+              <button v-if="motion.status === 'adopted'" class="adopted-button" disabled>
                 Adopted
               </button>
               <button v-else @click="patchAdopt(motion)" class="adopt-button">
@@ -168,108 +112,56 @@
 
     <div v-if="showDiv === 'petitiontracker'" class="motion-list">
       <h2>Petition Tracker</h2>
-      <ModalPopup
-        buttonLabel="Add Petition"
-        :buttonClass="customButtonClass"
-        :iconClass="customIconClass"
-      >
+      <ModalPopup buttonLabel="Add Petition" :buttonClass="customButtonClass" :iconClass="customIconClass">
         <PetitionTracker />
       </ModalPopup>
 
       <div>
         <ul class="petition-ul">
-          <li
-            v-for="motion in petitions"
-            :key="motion.id"
-            class="petition-item"
-          >
+          <li v-for="motion in petitions" :key="motion.id" class="petition-item">
             <div class="petition-details">
               <span class="petition-date">Date: {{ motion.date }}</span>
-              <span class="petition-subject"
-                >Subject: {{ motion.subject }}</span
-              >
-              <span class="petition-presenter"
-                >Presenter: {{ motion.presenter }}</span
-              >
-              <span class="petition-petitioner"
-                >Petitioner: {{ motion.petitioner }}</span
-              >
+              <span class="petition-subject">Subject: {{ motion.subject }}</span>
+              <span class="petition-presenter">Presenter: {{ motion.presenter }}</span>
+              <span class="petition-petitioner">Petitioner: {{ motion.petitioner }}</span>
             </div>
             <div class="update">
-              <ModalPopup
-                :buttonLabel="`Add: Document`"
-                :buttonClass="customButtonClass"
-                :iconClass="customIconClass"
-              >
-                <FileActivities
-                  :fileid="motion.id"
-                  :title="motion.petitioner"
-                  :description="motion.subject"
-                />
+              <ModalPopup :buttonLabel="`Add: Document`" :buttonClass="customButtonClass" :iconClass="customIconClass">
+                <FileActivities :fileid="motion.id" :title="motion.petitioner" :description="motion.subject" />
               </ModalPopup>
-              <ModalPopup
-                buttonLabel="Update Petition Status"
-                :buttonClass="customButtonClass"
-                :iconClass="customIconClass"
-                @click="petionId = motion.id"
-              >
+              <ModalPopup buttonLabel="Update Petition Status" :buttonClass="customButtonClass"
+                :iconClass="customIconClass" @click="petionId = motion.id">
                 <div class="form-popup">
                   <form @submit.prevent="addPetionActivity(motion)">
                     <label for="status">Status:</label>
                     <select v-model="petitionActivity.status">
-                      <option
-                        v-for="status in PetitionHandlingProcess"
-                        :key="status.id"
-                        :value="status.stage"
-                      >
+                      <option v-for="status in PetitionHandlingProcess" :key="status.id" :value="status.stage">
                         {{ status.stage }}
                       </option>
                     </select>
-                    <textarea
-                      name="description"
-                      cols="30"
-                      rows="10"
-                      v-model="petitionActivity.description"
-                    ></textarea>
+                    <textarea name="description" cols="30" rows="10" v-model="petitionActivity.description"></textarea>
                     <button type="submit">Update</button>
                   </form>
                 </div>
               </ModalPopup>
-              <ModalPopup
-                buttonLabel="Refer Petition"
-                :buttonClass="customButtonClass"
-                :iconClass="customIconClass"
-                @click="petionId = motion.id"
-              >
+              <ModalPopup buttonLabel="Refer Petition" :buttonClass="customButtonClass" :iconClass="customIconClass"
+                @click="petionId = motion.id">
                 <div class="form-popup">
                   <form @submit.prevent="addPetionActivity(motion)">
                     <label for="status">Refer:</label>
                     <select v-model="selectedCommittee">
-                      <option
-                        v-for="status in committees"
-                        :key="status.id"
-                        :value="status.id"
-                      >
+                      <option v-for="status in committees" :key="status.id" :value="status.id">
                         {{ status.name }}
                       </option>
                     </select>
 
                     <label for="status">Status:</label>
                     <select v-model="petitionActivity.status">
-                      <option
-                        v-for="status in PetitionHandlingProcess"
-                        :key="status.id"
-                        :value="status.stage"
-                      >
+                      <option v-for="status in PetitionHandlingProcess" :key="status.id" :value="status.stage">
                         {{ status.stage }}
                       </option>
                     </select>
-                    <textarea
-                      name="description"
-                      cols="30"
-                      rows="10"
-                      v-model="petitionActivity.description"
-                    ></textarea>
+                    <textarea name="description" cols="30" rows="10" v-model="petitionActivity.description"></textarea>
                     <button type="submit">Update</button>
                   </form>
                 </div>
@@ -420,7 +312,7 @@ export default {
       axios
         .patch(`/billtrackers/` + document.id + "/", {
           committee: selectedCommittee.value,
-          referred : true,
+          referred: true,
         })
         .then(() => {
           getCommittees();

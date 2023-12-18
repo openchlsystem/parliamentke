@@ -6,20 +6,24 @@
     <div class="metric-top">
       <div class="metric-cards">
         <div class="metric-card">
+            <span class="bi bi-file-earmark-text custom-icon"></span>
           <p>{{ billCount }}</p>
           <h3>Bills</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-clock-history custom-icon"></span>
           <p>{{ newBills }}</p>
           <h3>New Bills</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-check custom-icon"></span>
           <p>{{ billPassed }}</p>
           <h3>Bills Passed</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-percent custom-icon"></span>
           <p>{{ billsRational }}</p>
-          <h3>%</h3>
+          <!-- <h3>%</h3> -->
         </div>
       </div>
 

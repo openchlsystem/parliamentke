@@ -90,6 +90,12 @@ export default {
         await axios.patch("/billtrackers/" + activity.BillTracker + "/", { 
           status: activity.status,
         });
+        // reset form
+        activity.date = "";
+        activity.description = "";
+        activity.status = "";
+        activity.file = "";
+        
       } catch (error) {
         console.error(error);
       }

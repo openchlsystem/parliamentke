@@ -11,7 +11,7 @@
       <router-link to="/events">Events</router-link>|
       <div class="dropdown dropdown-arrow">
         <!-- Add the dropdown button -->
-        <router-link to="/backend">Back Office</router-link>
+        <router-link to="/backend">Directorates</router-link>
         <div class="dropdown-content">
           <!-- Add the dropdown items -->
           <router-link to="/legislative-services"

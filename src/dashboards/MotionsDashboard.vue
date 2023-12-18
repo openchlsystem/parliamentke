@@ -1,98 +1,67 @@
 <template>
-
   <div class="metric-area">
-    
+
     <div class="metric-top">
       <div class="metric-cards">
         <div class="metric-card">
+          <span class="bi bi-person-check custom-icon"></span>
           <p>{{ motionCount }}</p>
-          <h3>{{businessType}}</h3>
+          <h3>{{ businessType }}</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-clock-history custom-icon"></span>
+
           <p>{{ newBills }}</p>
-          <h3>New {{businessType}}</h3>
+          <h3>New {{ businessType }}</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-check custom-icon"></span>
+
           <p>{{ motionsAdopted }}</p>
-          <h3>{{Bills}} Adopted</h3>
+          <h3>{{ Bills }} Adopted</h3>
         </div>
         <div class="metric-card">
+          <span class="bi bi-percent custom-icon"></span>
           <p>{{ percentagemotionsAdopted }}</p>
-          <h3>%</h3>
+          <!-- <h3>%</h3> -->
         </div>
       </div>
 
       <div class="charts">
-        
+
 
         <div class="dashboard-item">
-          <GChart
-            type="PieChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="PieChart" :data="chartDataComputed" :options="chartOptions" />
           <h3>Bill By Sponser</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="ColumnChart"
-            :data="chartDataComputed3"
-            :options="chartOptions3"
-          />
+          <GChart type="ColumnChart" :data="chartDataComputed3" :options="chartOptions3" />
 
           <h3>Bill By Month</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="BarChart"
-            :data="chartDataComputed2"
-            :options="chartOptions"
-          />
+          <GChart type="BarChart" :data="chartDataComputed2" :options="chartOptions" />
           <h3>Bill By Stage</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="LineChart"
-            :data="chartDataComputed3"
-            :options="chartOptions3"
-          />
+          <GChart type="LineChart" :data="chartDataComputed3" :options="chartOptions3" />
           <h3>Bill by Month</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="AreaChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="AreaChart" :data="chartDataComputed" :options="chartOptions" />
           <h3>Bill by Year Comparison</h3>
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="ComboChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="ComboChart" :data="chartDataComputed" :options="chartOptions" />
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="ScatterChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="ScatterChart" :data="chartDataComputed" :options="chartOptions" />
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="BubbleChart"
-            :data="chartDataComputed"
-            :options="chartOptions"
-          />
+          <GChart type="BubbleChart" :data="chartDataComputed" :options="chartOptions" />
         </div>
         <div class="dashboard-item">
-          <GChart
-            type="Histogram"
-            :data="chartDataComputed2"
-            :options="chartOptions2"
-          />
+          <GChart type="Histogram" :data="chartDataComputed2" :options="chartOptions2" />
         </div>
       </div>
     </div>
@@ -169,14 +138,14 @@ export default {
     const getBillCountByMonth = async () => {
       try {
         const response = await axios.get(`/motiontrackers/`);
-        
+
 
         const chartDataObj = response.data.reduce((acc, curr) => {
           const month = new Date(curr.date).getMonth() + 1;
           const year = new Date(curr.date).getFullYear();
-          
+
           const key = `${month}/${year}`;
-          
+
           if (!acc[key]) {
             acc[key] = 1;
           } else {
@@ -184,7 +153,7 @@ export default {
           }
           return acc;
         }, {});
-        
+
         state.chartData3 = Object.entries(chartDataObj).reduce(
           (acc, [key, value]) => {
             acc.push([key, value]);
@@ -196,7 +165,7 @@ export default {
           const [monthB, yearB] = b[0].split('/');
           return new Date(yearA, monthA - 1) - new Date(yearB, monthB - 1);
         });
-        
+
         console.log("billCount", billCount.value);
       } catch (error) {
         console.error("Error fetching documents:", error);
@@ -424,8 +393,8 @@ export default {
       getBillCountByMonth,
       chartDataComputed3,
       businessType,
-      
-      
+
+
     };
   },
 };
